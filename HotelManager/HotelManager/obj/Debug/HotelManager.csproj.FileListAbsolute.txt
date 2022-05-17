@@ -20,3 +20,4 @@ C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\
 C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\SignUpWindow.g.cs
 C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\GuestWindow.baml
 C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\SignUpWindow.baml
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\HotelManager.csproj.SuggestedBindingRedirects.cache

@@ -23,5 +23,7 @@ namespace HotelManager
         {
             InitializeComponent();
         }
+
+        
     }
 }

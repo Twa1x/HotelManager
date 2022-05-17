@@ -4,9 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelManager"
+        xmlns:viewmodels="clr-namespace:HotelManager.ViewModels"
         mc:Ignorable="d"
         Title="SignUpWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <viewmodels:SignUpViewModel/>
+    </Window.DataContext>
+
+    <Window.Background>
+        <ImageBrush ImageSource="/Resources/backgroundSignUp.jpg" Stretch="Fill" />
+    </Window.Background>
     <Grid>
-        
+        <Label Content="      USERNAME " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="304,61,0,0" Background="#FF277B80" Width="152" Height="33" FontSize="16" Foreground="#FFB0B0B0"/>
+        <Label Content="      PASSWORD" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="304,127,0,0" Background="#FF277B80" Width="152" Height="33" FontSize="16" Foreground="#FFB0B0B0"/>
+        <PasswordBox   local:PasswordHelper.Attach="True" local:PasswordHelper.Password="{Binding SignUpModel.Password,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Name="pwdBox"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="152" Margin="304,165,0,0" Height="26"  />
+        <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding SignUpModel.Username, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="152" Margin="304,99,0,0"  />
+        <Button   Command="{Binding SignUpCommand}" Content="Sign Up" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="330,366,0,0" Foreground="#FF4F1BFF" Background="#FFF3992B" />
+        <CheckBox IsChecked="{Binding SignUpModel.IsAdmin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Name="admCheckBox" Content="Admin" Margin="256,300,475,73" />
+        <CheckBox IsChecked="{Binding SignUpModel.IsEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Name="empCheckBox" Content="Employee" Margin="342,300,362,73" />
+        <CheckBox IsChecked="{Binding SignUpModel.IsUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Name="userCheckBox" Content="User" Margin="452,300,272,91" />
+        <Label Content="       EMAIL" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="304,217,0,0" Background="#FF277B80" Width="152" Height="33" FontSize="16" Foreground="#FFB0B0B0"/>
+        <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding SignUpModel.Email, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="152" Margin="304,256,0,0"  />
     </Grid>
 </Window>

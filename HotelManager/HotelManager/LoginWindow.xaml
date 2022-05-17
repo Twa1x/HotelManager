@@ -20,7 +20,7 @@
         <Label Content="      PASSWORD" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,223,0,0" Background="#FF277B80" Width="152" Height="33" FontSize="16" Foreground="#FFB0B0B0"/>
         <PasswordBox   local:PasswordHelper.Attach="True" local:PasswordHelper.Password="{Binding _Login.Password,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Name="pwdBox"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="152" Margin="300,261,0,0" Height="26"  />
         <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding _Login.Username, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="152" Margin="300,195,0,0" />
-        <Button  Command="{Binding LoginCommand}" Content="LOGIN" HorizontalAlignment="Left" VerticalAlignment="Top" Width="93" Margin="336,350,0,0" Foreground="#FF4F1BFF" Background="#FFF3992B"/>
+        <Button  Command="{Binding LoginCommand}" Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Width="93" Margin="336,350,0,0" Foreground="#FF4F1BFF" Background="#FFF3992B" />
 
     </Grid>
 </Window>

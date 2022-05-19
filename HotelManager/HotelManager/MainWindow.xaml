@@ -20,7 +20,7 @@
         <Label Content="WELCOME TO HOTEL ALEXIS MANAGEMENT SYSTEM" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="32,10,0,0" Width="514" FontSize="20" FontStyle="Italic" FontFamily="Times New Roman" Foreground="White" Background="#FF169191"/>
         <Button  Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106" Margin="316,273,0,0"  Height="40" Command="{Binding LoginCommand}" Background="#FF169191" FontFamily="SimSun-ExtB" FontSize="16" Foreground="#FFC9C9C9"/>
         <Button Content="Sign Up" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106" Margin="316,318,0,0" Height="37" Command="{Binding SignUpCommand}" Background="#FF169191" Foreground="#FFC9C9C9" FontFamily="SimSun-ExtB" FontSize="16"/>
-        <Button Content="Guest" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106" Margin="316,360,0,0" Height="35" Command="{Binding GuestCommand}" Background="#FF169191" Foreground="#FFC9C9C9" FontFamily="SimSun-ExtB" FontSize="16" FontStyle="Italic"/>
+        <Button Content="Guest" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106" Margin="316,360,0,0" Height="35" Command="{Binding GuestCommand}" Background="#FF737D7D" Foreground="#FFC9C9C9" FontFamily="SimSun-ExtB" FontSize="16" FontStyle="Normal"/>
 
     </Grid>
 </Window>

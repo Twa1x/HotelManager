@@ -15,7 +15,16 @@ namespace HotelManager.Models
         private bool isEmployee;
         private bool isUser;
 
-
+       public SignUpModel()
+        {
+            _username = String.Empty;
+            _password = String.Empty;
+            isAdmin = false;
+            isEmployee = false;
+            isUser = false;
+            _email = String.Empty;
+             
+        }
         public string Email
         {
             get { return _email; }

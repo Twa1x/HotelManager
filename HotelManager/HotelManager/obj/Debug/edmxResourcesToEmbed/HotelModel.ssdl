@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Hotel.dbo.Users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="id_user" />
+      <PropertyRef Name="username" />
+      <PropertyRef Name="password" />
+      <PropertyRef Name="email" />
+      <PropertyRef Name="type" />
+    </Key>
+    <Property Name="id_user" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="type" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <Function Name="sp_get_users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_insert_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="username" Type="varchar" Mode="In" />
+    <Parameter Name="password" Type="varchar" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="type" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="HotelModelStoreContainer">
+    <EntitySet Name="Users" EntityType="Self.Users" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Users].[id_user] AS [id_user], 
+    [Users].[username] AS [username], 
+    [Users].[password] AS [password], 
+    [Users].[email] AS [email], 
+    [Users].[type] AS [type]
+    FROM [dbo].[Users] AS [Users]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HotelModelStoreContainer" CdmEntityContainer="HotelEntities">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="HotelModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="type" ColumnName="type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_get_users" FunctionName="HotelModel.Store.sp_get_users">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HotelModel.sp_get_users_Result">
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="type" ColumnName="type" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_insert_user" FunctionName="HotelModel.Store.sp_insert_user" />
+  </EntityContainerMapping>
+</Mapping>

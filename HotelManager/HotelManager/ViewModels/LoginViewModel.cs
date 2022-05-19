@@ -1,14 +1,17 @@
 ﻿using HotelManager.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace HotelManager.ViewModels
 {
-    public  class LoginViewModel
+    public class LoginViewModel
     {
         public LoginModel _Login { get; private set; }
 
@@ -21,8 +24,32 @@ namespace HotelManager.ViewModels
 
         private void Login()
         {
-            Console.WriteLine(_Login.Username);
-            Console.WriteLine(_Login.Password);
+            bool found = false;
+            HotelEntities hotelEntities = new HotelEntities();
+            List<User> listUsers = hotelEntities.Users.ToList();
+
+            foreach (User user in listUsers)
+            {
+                if (user.username == _Login.Username)
+                {
+                    found = true;
+                    if (user.password != _Login.Password)
+                    {
+                        MessageBox.Show("Password is wrong");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Logged in Succesfully");
+                    }
+                    break;
+                }
+            }
+
+            if (found == false)
+            {
+                MessageBox.Show("Username doesn't exist in our system!");
+            }
+       
         }
     }
 }

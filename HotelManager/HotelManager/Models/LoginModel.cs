@@ -9,7 +9,10 @@ namespace HotelManager.Models
     public class LoginModel : ObservableObject
     {
         private string _username;
-        private string _password;       
+        private string _password;
+        private bool isAdmin;
+        private bool isEmployee;
+        private bool isUser;
 
         public string Username
         {
@@ -21,6 +24,25 @@ namespace HotelManager.Models
         {
             get { return _password; }
             set { OnPropertyChanged(ref _password, value); }
+        }
+
+        public bool IsAdmin
+        {
+            get { return isAdmin; }
+            set { OnPropertyChanged(ref isAdmin, value); }
+        }
+
+        public bool IsEmployee
+        {
+            get { return isEmployee; }
+            set { OnPropertyChanged(ref isEmployee, value); }
+        }
+
+        public bool IsUser
+        {
+            get { return isUser; }
+            set { OnPropertyChanged(ref isUser, value); }
+
         }
     }
 }

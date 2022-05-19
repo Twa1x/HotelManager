@@ -21,3 +21,9 @@ C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\
 C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\GuestWindow.baml
 C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\SignUpWindow.baml
 C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\HotelManager.csproj.SuggestedBindingRedirects.cache
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\bin\Debug\EntityFramework.dll
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\bin\Debug\EntityFramework.xml
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\HotelManager_Content.g.cs
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\HotelManager.csproj.CopyComplete

@@ -40,6 +40,28 @@ namespace HotelManager.ViewModels
                     else
                     {
                         MessageBox.Show("Logged in Succesfully");
+                        switch (user.type)
+                        {
+                            case "admin":
+                                {
+                                    AdminWindow adminWindow = new AdminWindow();
+                                    adminWindow.Show();
+                                    break;
+                                }
+                            case "employee":
+                                {   EmployeeWindow employeeWindow = new EmployeeWindow();
+                                    employeeWindow.Show();
+                                    break;
+                                }
+                            case "user":
+                                {   
+                                    UserWindow userWindow = new UserWindow();
+                                    userWindow.Show();
+                                    break;
+                                }
+                            default:
+                                break;
+                        }
                     }
                     break;
                 }
@@ -49,7 +71,7 @@ namespace HotelManager.ViewModels
             {
                 MessageBox.Show("Username doesn't exist in our system!");
             }
-       
+
         }
     }
 }

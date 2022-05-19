@@ -27,3 +27,9 @@ C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\bin\Debug\
 C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\HotelManager_Content.g.cs
 C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\HotelManager.csproj.CopyComplete
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\AdminWindow.g.cs
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\EmployeeWindow.g.cs
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\UserWindow.g.cs
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\AdminWindow.baml
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\EmployeeWindow.baml
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\UserWindow.baml

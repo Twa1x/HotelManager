@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\App.xaml
-4522844662
+7-380022232
 21094946317
-21-1897886610
+241583211944
 191342771002
-GuestWindow.xaml;LoginWindow.xaml;MainWindow.xaml;SignUpWindow.xaml;
+AdminWindow.xaml;EmployeeWindow.xaml;GuestWindow.xaml;LoginWindow.xaml;MainWindow.xaml;SignUpWindow.xaml;UserWindow.xaml;
 
 False
 

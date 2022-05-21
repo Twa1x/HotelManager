@@ -3,10 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels="clr-namespace:HotelManager.ViewModels"
         xmlns:local="clr-namespace:HotelManager"
         mc:Ignorable="d"
         Title="AdminWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Window.DataContext>
+        <viewmodels:AdminViewModel/>
+    </Window.DataContext>
+    <Window.Background>
+        <ImageBrush ImageSource="/Resources/adminBackground.jpg" Stretch="Fill" />
+    </Window.Background>
+    <Grid Margin="-17,0,-47,-58">
+        <Button Command="{Binding EditServicesCommand}" Content="Edit Services" Margin="25,74,625,314" Background="#FFC2ED90" FontSize="16" FontFamily="Bahnschrift" Foreground="#FF0A0000"/>
+        <Button Command="{Binding EditRoomsCommand}" Content="Edit Rooms" Margin="578,74,72,314" Background="#FF549807" FontFamily="Bahnschrift" FontSize="16"/>
+        <Button Command="{Binding AddRoomsCommand}" Content="Add Rooms" Margin="578,218,72,170" Background="#FF549807" FontSize="16" FontFamily="Bahnschrift"/>
+        <Button Command="{Binding EditOffersCommand}" Content="Edit Offers" Margin="297,74,353,314" Background="#FF58C85F" FontSize="16" FontFamily="Bahnschrift"/>
+        <Button Command="{Binding AddServicesCommand}" Content="Add Services" Margin="25,213,625,175" Background="#FFC2ED90" FontFamily="Bahnschrift" FontSize="16"/>
+        <Button Command="{Binding AddOffersCommand}" Content="Add Offers" Margin="297,218,353,170" RenderTransformOrigin="1.121,1.453" Background="#FF58C85F" FontFamily="Bahnschrift" FontSize="16"/>
     </Grid>
 </Window>

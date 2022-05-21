@@ -65,6 +65,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddOffersWindow.xaml.cs">
+      <DependentUpon>AddOffersWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddRoomWindow.xaml.cs">
+      <DependentUpon>AddRoomWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddServicesWindow.xaml.cs">
+      <DependentUpon>AddServicesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
@@ -93,6 +102,9 @@
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\OffersModel.cs" />
+    <Compile Include="Models\RoomModel.cs" />
+    <Compile Include="Models\ServicesModel.cs" />
     <Compile Include="Models\SignUpModel.cs" />
     <Compile Include="PasswordHelper.cs" />
     <Compile Include="RelayCommand.cs" />
@@ -108,9 +120,25 @@
     <Compile Include="UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\OffersViewModel.cs" />
+    <Compile Include="ViewModels\RoomViewModel.cs" />
+    <Compile Include="ViewModels\ServicesViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
+    <Page Include="AddOffersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddRoomWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddServicesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdminWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -209,6 +237,23 @@
       <DependentUpon>HotelModel.edmx</DependentUpon>
       <LastGenOutput>HotelModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\RoomsPhoto\image1.jpg" />
+    <Resource Include="Resources\RoomsPhoto\image10.jpg" />
+    <Resource Include="Resources\RoomsPhoto\image11.jpg" />
+    <Resource Include="Resources\RoomsPhoto\image12.jpg" />
+    <Resource Include="Resources\RoomsPhoto\image13.jpg" />
+    <Resource Include="Resources\RoomsPhoto\image14.jpg" />
+    <Resource Include="Resources\RoomsPhoto\image15.jpg" />
+    <Resource Include="Resources\RoomsPhoto\image2.jpg" />
+    <Resource Include="Resources\RoomsPhoto\image3.jpg" />
+    <Resource Include="Resources\RoomsPhoto\image4.jpg" />
+    <Resource Include="Resources\RoomsPhoto\image5.jpg" />
+    <Resource Include="Resources\RoomsPhoto\image6.jpg" />
+    <Resource Include="Resources\RoomsPhoto\image7.jpg" />
+    <Resource Include="Resources\RoomsPhoto\image8.jpg" />
+    <Resource Include="Resources\RoomsPhoto\image9.jpg" />
+    <Resource Include="Resources\adminBackground.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

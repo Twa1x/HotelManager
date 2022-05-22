@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\App.xaml
-101066834101
+1142168615
 2-1957146511
-37-2008765408
+381005928730
 191342771002
-AddOffersWindow.xaml;AddRoomWindow.xaml;AddServicesWindow.xaml;AdminWindow.xaml;EmployeeWindow.xaml;GuestWindow.xaml;LoginWindow.xaml;MainWindow.xaml;SignUpWindow.xaml;UserWindow.xaml;
+AddOffersWindow.xaml;AddRoomWindow.xaml;AddServicesWindow.xaml;AdminWindow.xaml;EditRoomsWindow.xaml;EmployeeWindow.xaml;GuestWindow.xaml;LoginWindow.xaml;MainWindow.xaml;SignUpWindow.xaml;UserWindow.xaml;
 
 False
 

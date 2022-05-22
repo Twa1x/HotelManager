@@ -1,5 +1,7 @@
-﻿using System;
+﻿using HotelManager.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +21,15 @@ namespace HotelManager.ViewModels
         public ICommand EditServicesCommand { get; }
         public ICommand AddServicesCommand { get; }
 
+       
+
+      
+     
         public AdminViewModel()
         {
             EditRoomsCommand = new RelayCommand(EditRooms);
             AddRoomsCommand = new RelayCommand(AddRooms);
-
+          
             EditOffersCommand = new RelayCommand(EditOffers);
             AddOffersCommand = new RelayCommand(AddOffers);
 
@@ -63,7 +69,8 @@ namespace HotelManager.ViewModels
 
         private void EditRooms()
         {
-            throw new NotImplementedException();
+            EditRoomsWindow editRoomsWindow = new EditRoomsWindow();
+            editRoomsWindow.Show();
         }
     }
 }

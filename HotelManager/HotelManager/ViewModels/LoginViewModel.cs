@@ -62,6 +62,7 @@ namespace HotelManager.ViewModels
                             default:
                                 break;
                         }
+                        
                     }
                     break;
                 }

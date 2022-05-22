@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +11,17 @@ using System.Windows.Input;
 
 namespace HotelManager.ViewModels
 {
-    public class RoomViewModel
+    public class RoomViewModel : ObservableObject
     {
         public RoomModel roomModel { get; private set; }
+
+        private RoomModel currentRoom;
+        public RoomModel CurrentRoom
+        {
+            get { return currentRoom; }
+            set { OnPropertyChanged(ref currentRoom, value); }
+        }
+
 
         public ICommand AddCommand { get; }
         public ICommand SelectImage1Command { get; }
@@ -21,6 +30,7 @@ namespace HotelManager.ViewModels
 
         public RoomViewModel()
         {
+            Rooms = LoadRooms();
             roomModel = new RoomModel();
             roomModel.Avilabilty = true;
             AddCommand = new RelayCommand(Add);
@@ -28,7 +38,29 @@ namespace HotelManager.ViewModels
             SelectImage2Command = new RelayCommand(SelectImage2);
             SelectImage3Command = new RelayCommand(SelectImage3);
 
+        }
 
+
+
+        public ObservableCollection<RoomModel> Rooms { get; set; }
+        private ObservableCollection<RoomModel> LoadRooms()
+        {
+            ObservableCollection<RoomModel> tempRooms = new ObservableCollection<RoomModel>();
+            HotelEntities hotelEntities = new HotelEntities();
+            List<Room> listRooms = hotelEntities.Rooms.ToList();
+            foreach (var item in listRooms)
+            {
+                RoomModel tempRoomModel = new RoomModel();
+                tempRoomModel.Type = item.type;
+                tempRoomModel.Avilabilty = Convert.ToBoolean(item.availabilty);
+                tempRoomModel.AditionalServices = item.aditional_services;
+                tempRoomModel.Price = Convert.ToString(item.price);
+                tempRoomModel.Image1 = item.image1;
+                tempRoomModel.Image2 = item.image2;
+                tempRoomModel.Image3 = item.image3;
+                tempRooms.Add(tempRoomModel);
+            }
+            return tempRooms;
         }
 
         private void Add()

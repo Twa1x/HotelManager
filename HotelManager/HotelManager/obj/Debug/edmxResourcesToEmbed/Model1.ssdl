@@ -1,5 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="HotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Offers">
+    <Key>
+      <PropertyRef Name="id_offer" />
+    </Key>
+    <Property Name="id_offer" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="price" Type="float" Nullable="false" />
+    <Property Name="date_start" Type="date" Nullable="false" />
+    <Property Name="date_end" Type="date" Nullable="false" />
+    <Property Name="room_id" Type="bigint" Nullable="false" />
+    <Property Name="deleted" Type="bigint" Nullable="false" />
+  </EntityType>
   <EntityType Name="Rooms">
     <Key>
       <PropertyRef Name="id_room" />
@@ -13,6 +26,15 @@
     <Property Name="image2" Type="varchar" MaxLength="50" />
     <Property Name="image3" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Services">
+    <Key>
+      <PropertyRef Name="id_service" />
+    </Key>
+    <Property Name="id_service" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="price" Type="float" Nullable="false" />
+    <Property Name="deleted" Type="bigint" Nullable="false" />
+  </EntityType>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="id_user" />
@@ -23,7 +45,27 @@
     <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="type" Type="varchar" MaxLength="20" Nullable="false" />
   </EntityType>
-  <Function Name="sp_get_users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Association Name="FK_Offers_Rooms">
+    <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
+    <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rooms">
+        <PropertyRef Name="id_room" />
+      </Principal>
+      <Dependent Role="Offers">
+        <PropertyRef Name="room_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_insert_offer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="description" Type="varchar" Mode="In" />
+    <Parameter Name="price" Type="float" Mode="In" />
+    <Parameter Name="date_start" Type="date" Mode="In" />
+    <Parameter Name="date_end" Type="date" Mode="In" />
+    <Parameter Name="room_id" Type="bigint" Mode="In" />
+    <Parameter Name="deleted" Type="bigint" Mode="In" />
+  </Function>
   <Function Name="sp_insert_room" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="type" Type="varchar" Mode="In" />
     <Parameter Name="availabilty" Type="bigint" Mode="In" />
@@ -33,6 +75,11 @@
     <Parameter Name="image2" Type="varchar" Mode="In" />
     <Parameter Name="image3" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="sp_insert_service" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="price" Type="float" Mode="In" />
+    <Parameter Name="deleted" Type="bigint" Mode="In" />
+  </Function>
   <Function Name="sp_insert_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="username" Type="varchar" Mode="In" />
     <Parameter Name="password" Type="varchar" Mode="In" />
@@ -40,7 +87,13 @@
     <Parameter Name="type" Type="varchar" Mode="In" />
   </Function>
   <EntityContainer Name="HotelModelStoreContainer">
+    <EntitySet Name="Offers" EntityType="Self.Offers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Offers_Rooms" Association="Self.FK_Offers_Rooms">
+      <End Role="Rooms" EntitySet="Rooms" />
+      <End Role="Offers" EntitySet="Offers" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

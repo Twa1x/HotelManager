@@ -12,6 +12,7 @@
     <Property Name="image1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="image2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="image3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Offers" Relationship="HotelModel.FK_Offers_Rooms" FromRole="Room" ToRole="Offer" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -42,6 +43,26 @@
       <Parameter Name="email" Mode="In" Type="String" />
       <Parameter Name="type" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="Services" EntityType="HotelModel.Service" />
+    <FunctionImport Name="sp_insert_service">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="price" Mode="In" Type="Double" />
+      <Parameter Name="deleted" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <EntitySet Name="Offers" EntityType="HotelModel.Offer" />
+    <AssociationSet Name="FK_Offers_Rooms" Association="HotelModel.FK_Offers_Rooms">
+      <End Role="Room" EntitySet="Rooms" />
+      <End Role="Offer" EntitySet="Offers" />
+    </AssociationSet>
+    <FunctionImport Name="sp_insert_offer">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="price" Mode="In" Type="Double" />
+      <Parameter Name="date_start" Mode="In" Type="DateTime" />
+      <Parameter Name="date_end" Mode="In" Type="DateTime" />
+      <Parameter Name="room_id" Mode="In" Type="Int64" />
+      <Parameter Name="deleted" Mode="In" Type="Int64" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_get_users_Result">
     <Property Type="Int64" Name="id_user" Nullable="false" />
@@ -50,4 +71,39 @@
     <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="type" Nullable="false" MaxLength="20" />
   </ComplexType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="id_service" />
+    </Key>
+    <Property Name="id_service" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Double" Nullable="false" />
+    <Property Name="deleted" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Offer">
+    <Key>
+      <PropertyRef Name="id_offer" />
+    </Key>
+    <Property Name="id_offer" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Double" Nullable="false" />
+    <Property Name="date_start" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="date_end" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="room_id" Type="Int64" Nullable="false" />
+    <Property Name="deleted" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Room" Relationship="HotelModel.FK_Offers_Rooms" FromRole="Offer" ToRole="Room" />
+  </EntityType>
+  <Association Name="FK_Offers_Rooms">
+    <End Type="HotelModel.Room" Role="Room" Multiplicity="1" />
+    <End Type="HotelModel.Offer" Role="Offer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="id_room" />
+      </Principal>
+      <Dependent Role="Offer">
+        <PropertyRef Name="room_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

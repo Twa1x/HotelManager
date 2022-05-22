@@ -14,6 +14,12 @@ namespace HotelManager
     
     public partial class Room
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Room()
+        {
+            this.Offers = new HashSet<Offer>();
+        }
+    
         public long id_room { get; set; }
         public string type { get; set; }
         public long availabilty { get; set; }
@@ -22,5 +28,8 @@ namespace HotelManager
         public string image1 { get; set; }
         public string image2 { get; set; }
         public string image3 { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Offer> Offers { get; set; }
     }
 }

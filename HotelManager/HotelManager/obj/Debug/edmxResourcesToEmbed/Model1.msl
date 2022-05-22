@@ -26,18 +26,33 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="sp_get_users" FunctionName="HotelModel.Store.sp_get_users">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="HotelModel.sp_get_users_Result">
-          <ScalarProperty Name="id_user" ColumnName="id_user" />
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="type" ColumnName="type" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_insert_room" FunctionName="HotelModel.Store.sp_insert_room" />
     <FunctionImportMapping FunctionImportName="sp_insert_user" FunctionName="HotelModel.Store.sp_insert_user" />
+    <EntitySetMapping Name="Services">
+      <EntityTypeMapping TypeName="HotelModel.Service">
+        <MappingFragment StoreEntitySet="Services">
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id_service" ColumnName="id_service" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_insert_service" FunctionName="HotelModel.Store.sp_insert_service" />
+    <EntitySetMapping Name="Offers">
+      <EntityTypeMapping TypeName="HotelModel.Offer">
+        <MappingFragment StoreEntitySet="Offers">
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="room_id" ColumnName="room_id" />
+          <ScalarProperty Name="date_end" ColumnName="date_end" />
+          <ScalarProperty Name="date_start" ColumnName="date_start" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id_offer" ColumnName="id_offer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_insert_offer" FunctionName="HotelModel.Store.sp_insert_offer" />
   </EntityContainerMapping>
 </Mapping>

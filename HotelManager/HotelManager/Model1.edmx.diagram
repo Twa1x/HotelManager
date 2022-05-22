@@ -7,6 +7,9 @@
       <Diagram DiagramId="4fa26317ff4d419b927a2645b4292ec4" Name="Diagram1">
         <EntityTypeShape EntityType="HotelModel.Room" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HotelModel.User" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.Service" Width="1.5" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="HotelModel.Offer" Width="1.5" PointX="3" PointY="6.75" />
+        <AssociationConnector Association="HotelModel.FK_Offers_Rooms" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

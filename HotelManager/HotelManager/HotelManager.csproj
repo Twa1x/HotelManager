@@ -106,9 +106,15 @@
     <Compile Include="Models\RoomModel.cs" />
     <Compile Include="Models\ServicesModel.cs" />
     <Compile Include="Models\SignUpModel.cs" />
+    <Compile Include="Offer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="PasswordHelper.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Room.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="SignUpWindow.xaml.cs">

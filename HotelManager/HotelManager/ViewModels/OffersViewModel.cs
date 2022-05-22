@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace HotelManager.ViewModels
@@ -20,12 +21,10 @@ namespace HotelManager.ViewModels
 
         private void Add()
         {
-            Console.WriteLine(offersModel.Name);
-            Console.WriteLine(offersModel.Description);
-            Console.WriteLine(offersModel.Price);
-            Console.WriteLine(offersModel.DateStart);
-            Console.WriteLine(offersModel.DateEnd);
-            Console.WriteLine(offersModel.RoomId);
+            HotelEntities hotelEntities = new HotelEntities();
+            hotelEntities.sp_insert_offer(offersModel.Name, offersModel.Description, Convert.ToDouble(offersModel.Price),
+                Convert.ToDateTime(offersModel.DateStart), Convert.ToDateTime(offersModel.DateEnd), offersModel.RoomId, 0);
+            MessageBox.Show("Offer added succesfully!");
         }
     }
 }

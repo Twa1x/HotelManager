@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace HotelManager.ViewModels
 {
     public class ServicesViewModel
     {
-        public ServicesModel servicesModel { get;private set; }
+        public ServicesModel servicesModel { get; private set; }
         public ICommand AddCommand { get; }
         public ServicesViewModel()
         {
@@ -20,8 +21,9 @@ namespace HotelManager.ViewModels
 
         private void Add()
         {
-            Console.WriteLine(servicesModel.Name);
-            Console.WriteLine(servicesModel.Price);
+           HotelEntities hotelEntities = new HotelEntities();
+            hotelEntities.sp_insert_service(servicesModel.Name, Convert.ToDouble(servicesModel.Price), 0);
+            MessageBox.Show("Service added succesfully!!");
         }
-    }
+}
 }

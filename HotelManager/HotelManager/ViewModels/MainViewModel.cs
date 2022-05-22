@@ -42,10 +42,10 @@ namespace HotelManager.ViewModels
 
         private void Guest()
         {
-            //GuestWindow guestWindow = new GuestWindow();
-            //guestWindow.Show();
-            AdminWindow adminWindow = new AdminWindow(); 
-            adminWindow.Show();
+            GuestWindow guestWindow = new GuestWindow();
+            guestWindow.Show();
+            //AdminWindow adminWindow = new AdminWindow(); 
+            //adminWindow.Show();
         }
 
     }

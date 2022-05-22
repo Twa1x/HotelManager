@@ -39,12 +39,12 @@ namespace HotelManager.ViewModels
             }
             else
             {
-                Console.WriteLine(roomModel.Type);
-                Console.WriteLine(roomModel.Price);
-                Console.WriteLine(roomModel.AditionalServices);
-                Console.WriteLine(roomModel.Image1);
-                Console.WriteLine(roomModel.Image2);
-                Console.WriteLine(roomModel.Image3);
+
+                HotelEntities hotelEntities = new HotelEntities();
+
+                hotelEntities.sp_insert_room(roomModel.Type, Convert.ToInt32(roomModel.Avilabilty),
+                    roomModel.AditionalServices, Convert.ToDouble(roomModel.Price), roomModel.Image1, roomModel.Image2, roomModel.Image3);
+                MessageBox.Show("Room added succesfully!!");
             }
         }
 

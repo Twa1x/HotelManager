@@ -1,6 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="HotelModelStoreContainer" CdmEntityContainer="HotelEntities">
+    <EntitySetMapping Name="Rooms">
+      <EntityTypeMapping TypeName="HotelModel.Room">
+        <MappingFragment StoreEntitySet="Rooms">
+          <ScalarProperty Name="id_room" ColumnName="id_room" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="availabilty" ColumnName="availabilty" />
+          <ScalarProperty Name="aditional_services" ColumnName="aditional_services" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="image1" ColumnName="image1" />
+          <ScalarProperty Name="image2" ColumnName="image2" />
+          <ScalarProperty Name="image3" ColumnName="image3" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="HotelModel.User">
         <MappingFragment StoreEntitySet="Users">
@@ -23,21 +37,7 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_insert_user" FunctionName="HotelModel.Store.sp_insert_user" />
-    <EntitySetMapping Name="Rooms">
-      <EntityTypeMapping TypeName="HotelModel.Room">
-        <MappingFragment StoreEntitySet="Rooms">
-          <ScalarProperty Name="image3" ColumnName="image3" />
-          <ScalarProperty Name="image2" ColumnName="image2" />
-          <ScalarProperty Name="image1" ColumnName="image1" />
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="aditional_services" ColumnName="aditional_services" />
-          <ScalarProperty Name="availabilty" ColumnName="availabilty" />
-          <ScalarProperty Name="type" ColumnName="type" />
-          <ScalarProperty Name="id_room" ColumnName="id_room" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="sp_insert_room" FunctionName="HotelModel.Store.sp_insert_room" />
+    <FunctionImportMapping FunctionImportName="sp_insert_user" FunctionName="HotelModel.Store.sp_insert_user" />
   </EntityContainerMapping>
 </Mapping>

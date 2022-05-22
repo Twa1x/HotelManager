@@ -1,12 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="HotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="id_room" />
+    </Key>
+    <Property Name="id_room" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="availabilty" Type="Int64" Nullable="false" />
+    <Property Name="aditional_services" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="price" Type="Double" Nullable="false" />
+    <Property Name="image1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="image2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="image3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="id_user" />
-      <PropertyRef Name="username" />
-      <PropertyRef Name="password" />
-      <PropertyRef Name="email" />
-      <PropertyRef Name="type" />
     </Key>
     <Property Name="id_user" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -15,15 +24,9 @@
     <Property Name="type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityContainer Name="HotelEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Rooms" EntityType="Self.Room" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <FunctionImport Name="sp_get_users" ReturnType="Collection(HotelModel.sp_get_users_Result)" />
-    <FunctionImport Name="sp_insert_user">
-      <Parameter Name="username" Mode="In" Type="String" />
-      <Parameter Name="password" Mode="In" Type="String" />
-      <Parameter Name="email" Mode="In" Type="String" />
-      <Parameter Name="type" Mode="In" Type="String" />
-    </FunctionImport>
-    <EntitySet Name="Rooms" EntityType="HotelModel.Room" />
     <FunctionImport Name="sp_insert_room">
       <Parameter Name="type" Mode="In" Type="String" />
       <Parameter Name="availabilty" Mode="In" Type="Int64" />
@@ -33,6 +36,12 @@
       <Parameter Name="image2" Mode="In" Type="String" />
       <Parameter Name="image3" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="sp_insert_user">
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="type" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_get_users_Result">
     <Property Type="Int64" Name="id_user" Nullable="false" />
@@ -41,17 +50,4 @@
     <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="type" Nullable="false" MaxLength="20" />
   </ComplexType>
-  <EntityType Name="Room">
-    <Key>
-      <PropertyRef Name="id_room" />
-    </Key>
-    <Property Name="id_room" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="availabilty" Type="Int64" Nullable="false" />
-    <Property Name="aditional_services" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="price" Type="Double" Nullable="false" />
-    <Property Name="image1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="image2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="image3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-  </EntityType>
 </Schema>

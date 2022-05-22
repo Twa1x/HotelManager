@@ -27,11 +27,45 @@ namespace HotelManager
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<User> Users { get; set; }
     
         public virtual ObjectResult<sp_get_users_Result> sp_get_users()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_get_users_Result>("sp_get_users");
+        }
+    
+        public virtual int sp_insert_room(string type, Nullable<long> availabilty, string aditional_services, Nullable<double> price, string image1, string image2, string image3)
+        {
+            var typeParameter = type != null ?
+                new ObjectParameter("type", type) :
+                new ObjectParameter("type", typeof(string));
+    
+            var availabiltyParameter = availabilty.HasValue ?
+                new ObjectParameter("availabilty", availabilty) :
+                new ObjectParameter("availabilty", typeof(long));
+    
+            var aditional_servicesParameter = aditional_services != null ?
+                new ObjectParameter("aditional_services", aditional_services) :
+                new ObjectParameter("aditional_services", typeof(string));
+    
+            var priceParameter = price.HasValue ?
+                new ObjectParameter("price", price) :
+                new ObjectParameter("price", typeof(double));
+    
+            var image1Parameter = image1 != null ?
+                new ObjectParameter("image1", image1) :
+                new ObjectParameter("image1", typeof(string));
+    
+            var image2Parameter = image2 != null ?
+                new ObjectParameter("image2", image2) :
+                new ObjectParameter("image2", typeof(string));
+    
+            var image3Parameter = image3 != null ?
+                new ObjectParameter("image3", image3) :
+                new ObjectParameter("image3", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_room", typeParameter, availabiltyParameter, aditional_servicesParameter, priceParameter, image1Parameter, image2Parameter, image3Parameter);
         }
     
         public virtual int sp_insert_user(string username, string password, string email, string type)

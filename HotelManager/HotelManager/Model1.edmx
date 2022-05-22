@@ -5,15 +5,22 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="HotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Hotel.dbo.Users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Rooms">
+          <Key>
+            <PropertyRef Name="id_room" />
+          </Key>
+          <Property Name="id_room" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="availabilty" Type="bigint" Nullable="false" />
+          <Property Name="aditional_services" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="price" Type="float" Nullable="false" />
+          <Property Name="image1" Type="varchar" MaxLength="50" />
+          <Property Name="image2" Type="varchar" MaxLength="50" />
+          <Property Name="image3" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="id_user" />
-            <PropertyRef Name="username" />
-            <PropertyRef Name="password" />
-            <PropertyRef Name="email" />
-            <PropertyRef Name="type" />
           </Key>
           <Property Name="id_user" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
@@ -22,6 +29,15 @@ warning 6002: The table/view 'Hotel.dbo.Users' does not have a primary key defin
           <Property Name="type" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <Function Name="sp_get_users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_insert_room" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="type" Type="varchar" Mode="In" />
+          <Parameter Name="availabilty" Type="bigint" Mode="In" />
+          <Parameter Name="aditional_services" Type="varchar" Mode="In" />
+          <Parameter Name="price" Type="float" Mode="In" />
+          <Parameter Name="image1" Type="varchar" Mode="In" />
+          <Parameter Name="image2" Type="varchar" Mode="In" />
+          <Parameter Name="image3" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_insert_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="varchar" Mode="In" />
           <Parameter Name="password" Type="varchar" Mode="In" />
@@ -29,28 +45,30 @@ warning 6002: The table/view 'Hotel.dbo.Users' does not have a primary key defin
           <Parameter Name="type" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="HotelModelStoreContainer">
-          <EntitySet Name="Users" EntityType="Self.Users" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Users].[id_user] AS [id_user], 
-    [Users].[username] AS [username], 
-    [Users].[password] AS [password], 
-    [Users].[email] AS [email], 
-    [Users].[type] AS [type]
-    FROM [dbo].[Users] AS [Users]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="id_room" />
+          </Key>
+          <Property Name="id_room" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="availabilty" Type="Int64" Nullable="false" />
+          <Property Name="aditional_services" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="image1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="image2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="image3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="id_user" />
-            <PropertyRef Name="username" />
-            <PropertyRef Name="password" />
-            <PropertyRef Name="email" />
-            <PropertyRef Name="type" />
           </Key>
           <Property Name="id_user" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -59,8 +77,18 @@ warning 6002: The table/view 'Hotel.dbo.Users' does not have a primary key defin
           <Property Name="type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityContainer Name="HotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Rooms" EntityType="Self.Room" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <FunctionImport Name="sp_get_users" ReturnType="Collection(HotelModel.sp_get_users_Result)" />
+          <FunctionImport Name="sp_insert_room">
+            <Parameter Name="type" Mode="In" Type="String" />
+            <Parameter Name="availabilty" Mode="In" Type="Int64" />
+            <Parameter Name="aditional_services" Mode="In" Type="String" />
+            <Parameter Name="price" Mode="In" Type="Double" />
+            <Parameter Name="image1" Mode="In" Type="String" />
+            <Parameter Name="image2" Mode="In" Type="String" />
+            <Parameter Name="image3" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="sp_insert_user">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
@@ -81,6 +109,20 @@ warning 6002: The table/view 'Hotel.dbo.Users' does not have a primary key defin
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="HotelModelStoreContainer" CdmEntityContainer="HotelEntities">
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="HotelModel.Room">
+              <MappingFragment StoreEntitySet="Rooms">
+                <ScalarProperty Name="id_room" ColumnName="id_room" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="availabilty" ColumnName="availabilty" />
+                <ScalarProperty Name="aditional_services" ColumnName="aditional_services" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="image1" ColumnName="image1" />
+                <ScalarProperty Name="image2" ColumnName="image2" />
+                <ScalarProperty Name="image3" ColumnName="image3" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="HotelModel.User">
               <MappingFragment StoreEntitySet="Users">
@@ -103,6 +145,7 @@ warning 6002: The table/view 'Hotel.dbo.Users' does not have a primary key defin
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_insert_room" FunctionName="HotelModel.Store.sp_insert_room" />
           <FunctionImportMapping FunctionImportName="sp_insert_user" FunctionName="HotelModel.Store.sp_insert_user" />
         </EntityContainerMapping>
       </Mapping>

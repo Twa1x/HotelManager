@@ -39,7 +39,7 @@ namespace HotelManager.ViewModels
                     }
                     else
                     {
-                        MessageBox.Show("Logged in Succesfully");
+                      //  MessageBox.Show("Logged in Succesfully");
                         switch (user.type)
                         {
                             case "admin":

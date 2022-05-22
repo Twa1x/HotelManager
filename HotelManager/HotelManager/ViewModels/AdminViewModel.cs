@@ -47,7 +47,8 @@ namespace HotelManager.ViewModels
 
         private void EditServices()
         {
-            throw new NotImplementedException();
+          EditServicesWindow editServicesWindow = new EditServicesWindow();
+            editServicesWindow.Show();
         }
 
         private void AddOffers()
@@ -58,7 +59,8 @@ namespace HotelManager.ViewModels
 
         private void EditOffers()
         {
-            throw new NotImplementedException();
+           EditOffersWindow editOffersWindow = new EditOffersWindow();
+            editOffersWindow.Show();
         }
 
         private void AddRooms()

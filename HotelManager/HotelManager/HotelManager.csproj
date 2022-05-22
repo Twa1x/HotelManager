@@ -77,8 +77,14 @@
     <Compile Include="AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditOffersWindow.xaml.cs">
+      <DependentUpon>EditOffersWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditRoomsWindow.xaml.cs">
       <DependentUpon>EditRoomsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditServicesWindow.xaml.cs">
+      <DependentUpon>EditServicesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="EmployeeWindow.xaml.cs">
       <DependentUpon>EmployeeWindow.xaml</DependentUpon>
@@ -155,7 +161,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="EditOffersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditRoomsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditServicesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

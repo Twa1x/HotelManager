@@ -14,10 +14,19 @@ namespace HotelManager
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Clients = new HashSet<Client>();
+        }
+    
         public long id_user { get; set; }
         public string username { get; set; }
         public string password { get; set; }
         public string email { get; set; }
         public string type { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Client> Clients { get; set; }
     }
 }

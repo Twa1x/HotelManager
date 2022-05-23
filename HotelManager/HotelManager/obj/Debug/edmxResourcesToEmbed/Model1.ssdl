@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="HotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="id_client" />
+    </Key>
+    <Property Name="id_client" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_user" Type="bigint" Nullable="false" />
+  </EntityType>
   <EntityType Name="Offers">
     <Key>
       <PropertyRef Name="id_offer" />
@@ -12,6 +19,20 @@
     <Property Name="date_end" Type="date" Nullable="false" />
     <Property Name="room_id" Type="bigint" Nullable="false" />
     <Property Name="deleted" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reservations">
+    <Key>
+      <PropertyRef Name="id_reservation" />
+    </Key>
+    <Property Name="id_reservation" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date_start" Type="date" Nullable="false" />
+    <Property Name="date_end" Type="date" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="id_room" Type="bigint" Nullable="false" />
+    <Property Name="id_client" Type="bigint" Nullable="false" />
+    <Property Name="id_service" Type="bigint" />
+    <Property Name="price" Type="float" Nullable="false" />
+    <Property Name="deleted" Type="bigint" />
   </EntityType>
   <EntityType Name="Rooms">
     <Key>
@@ -46,6 +67,18 @@
     <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="type" Type="varchar" MaxLength="20" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Clients_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Offers_Rooms">
     <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
     <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
@@ -58,6 +91,45 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Reservations_Clients">
+    <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="id_client" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservations_Rooms">
+    <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rooms">
+        <PropertyRef Name="id_room" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="id_room" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservations_Services">
+    <End Role="Services" Type="Self.Services" Multiplicity="0..1" />
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="id_service" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="id_service" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_insert_client" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_user" Type="bigint" Mode="In" />
+  </Function>
   <Function Name="sp_insert_offer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="name" Type="varchar" Mode="In" />
     <Parameter Name="description" Type="varchar" Mode="In" />
@@ -65,6 +137,16 @@
     <Parameter Name="date_start" Type="date" Mode="In" />
     <Parameter Name="date_end" Type="date" Mode="In" />
     <Parameter Name="room_id" Type="bigint" Mode="In" />
+    <Parameter Name="deleted" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_insert_reservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="date_start" Type="date" Mode="In" />
+    <Parameter Name="date_end" Type="date" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+    <Parameter Name="id_room" Type="bigint" Mode="In" />
+    <Parameter Name="id_client" Type="bigint" Mode="In" />
+    <Parameter Name="id_service" Type="bigint" Mode="In" />
+    <Parameter Name="price" Type="float" Mode="In" />
     <Parameter Name="deleted" Type="bigint" Mode="In" />
   </Function>
   <Function Name="sp_insert_room" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -116,13 +198,31 @@
     <Parameter Name="deleted" Type="bigint" Mode="In" />
   </Function>
   <EntityContainer Name="HotelModelStoreContainer">
+    <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Offers" EntityType="Self.Offers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reservations" EntityType="Self.Reservations" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Clients_Users" Association="Self.FK_Clients_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
     <AssociationSet Name="FK_Offers_Rooms" Association="Self.FK_Offers_Rooms">
       <End Role="Rooms" EntitySet="Rooms" />
       <End Role="Offers" EntitySet="Offers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservations_Clients" Association="Self.FK_Reservations_Clients">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservations_Rooms" Association="Self.FK_Reservations_Rooms">
+      <End Role="Rooms" EntitySet="Rooms" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservations_Services" Association="Self.FK_Reservations_Services">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="Reservations" EntitySet="Reservations" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -4,12 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4fa26317ff4d419b927a2645b4292ec4" Name="Diagram1">
+      <Diagram DiagramId="4fa26317ff4d419b927a2645b4292ec4" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="HotelModel.Room" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HotelModel.User" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HotelModel.Service" Width="1.5" PointX="3.375" PointY="3.75" />
         <EntityTypeShape EntityType="HotelModel.Offer" Width="1.5" PointX="3" PointY="6.75" />
         <AssociationConnector Association="HotelModel.FK_Offers_Rooms" />
+        <EntityTypeShape EntityType="HotelModel.Client" Width="1.5" PointX="3.375" PointY="10.375" />
+        <EntityTypeShape EntityType="HotelModel.Reservation" Width="1.5" PointX="5.625" PointY="1.625" />
+        <AssociationConnector Association="HotelModel.FK_Clients_Users" />
+        <AssociationConnector Association="HotelModel.FK_Reservations_Clients" />
+        <AssociationConnector Association="HotelModel.FK_Reservations_Rooms" />
+        <AssociationConnector Association="HotelModel.FK_Reservations_Services" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

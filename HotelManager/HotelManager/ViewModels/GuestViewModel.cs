@@ -34,7 +34,9 @@ namespace HotelManager.ViewModels
 
         private void DetailRoom()
         { 
+
             DetailsRoomWindow detailsRoomWindow = new DetailsRoomWindow();
+            detailsRoomWindow.DataContext = this;
             detailsRoomWindow.ShowDialog();
         }
 

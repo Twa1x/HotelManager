@@ -66,7 +66,25 @@ namespace HotelManager.ViewModels
                         }
                         else if (SignUpModel.IsUser == true)
                         {
+                            long id = 0;
                             hotelEntities.sp_insert_user(SignUpModel.Username, SignUpModel.Password, SignUpModel.Email, "user");
+
+                            List<User> users = hotelEntities.Users.ToList();
+
+                            for (int i = users.Count-1; i > 0; i--)
+                            {
+                                   
+                                if (users.ElementAt(i).type == "user")
+                                {
+                                    id = users.ElementAt(i).id_user;
+                                    break;
+                                }
+                            }
+
+
+
+
+                            hotelEntities.sp_insert_client(id);
                             MessageBox.Show("Your account has been created sucessfully!");
 
                         }

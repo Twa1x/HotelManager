@@ -14,6 +14,7 @@
     <Property Name="image3" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Offers" Relationship="HotelModel.FK_Offers_Rooms" FromRole="Room" ToRole="Offer" />
     <Property Name="deleted" Type="Int64" />
+    <NavigationProperty Name="Reservations" Relationship="HotelModel.FK_Reservations_Rooms" FromRole="Room" ToRole="Reservation" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -24,6 +25,7 @@
     <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Clients" Relationship="HotelModel.FK_Clients_Users" FromRole="User" ToRole="Client" />
   </EntityType>
   <EntityContainer Name="HotelEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Rooms" EntityType="Self.Room" />
@@ -92,6 +94,37 @@
       <Parameter Name="date_end" Mode="In" Type="DateTime" />
       <Parameter Name="deleted" Mode="In" Type="Int64" />
     </FunctionImport>
+    <EntitySet Name="Clients" EntityType="HotelModel.Client" />
+    <EntitySet Name="Reservations" EntityType="HotelModel.Reservation" />
+    <AssociationSet Name="FK_Clients_Users" Association="HotelModel.FK_Clients_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Client" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservations_Clients" Association="HotelModel.FK_Reservations_Clients">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Reservation" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservations_Rooms" Association="HotelModel.FK_Reservations_Rooms">
+      <End Role="Room" EntitySet="Rooms" />
+      <End Role="Reservation" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservations_Services" Association="HotelModel.FK_Reservations_Services">
+      <End Role="Service" EntitySet="Services" />
+      <End Role="Reservation" EntitySet="Reservations" />
+    </AssociationSet>
+    <FunctionImport Name="sp_insert_client">
+      <Parameter Name="id_user" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_insert_reservation">
+      <Parameter Name="date_start" Mode="In" Type="DateTime" />
+      <Parameter Name="date_end" Mode="In" Type="DateTime" />
+      <Parameter Name="status" Mode="In" Type="String" />
+      <Parameter Name="id_room" Mode="In" Type="Int64" />
+      <Parameter Name="id_client" Mode="In" Type="Int64" />
+      <Parameter Name="id_service" Mode="In" Type="Int64" />
+      <Parameter Name="price" Mode="In" Type="Double" />
+      <Parameter Name="deleted" Mode="In" Type="Int64" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_get_users_Result">
     <Property Type="Int64" Name="id_user" Nullable="false" />
@@ -108,6 +141,7 @@
     <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="price" Type="Double" Nullable="false" />
     <Property Name="deleted" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Reservations" Relationship="HotelModel.FK_Reservations_Services" FromRole="Service" ToRole="Reservation" />
   </EntityType>
   <EntityType Name="Offer">
     <Key>
@@ -132,6 +166,80 @@
       </Principal>
       <Dependent Role="Offer">
         <PropertyRef Name="room_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="id_client" />
+    </Key>
+    <Property Name="id_client" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_user" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="HotelModel.FK_Clients_Users" FromRole="Client" ToRole="User" />
+    <NavigationProperty Name="Reservations" Relationship="HotelModel.FK_Reservations_Clients" FromRole="Client" ToRole="Reservation" />
+  </EntityType>
+  <EntityType Name="Reservation">
+    <Key>
+      <PropertyRef Name="id_reservation" />
+    </Key>
+    <Property Name="id_reservation" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="date_start" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="date_end" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="status" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="id_room" Type="Int64" Nullable="false" />
+    <Property Name="id_client" Type="Int64" Nullable="false" />
+    <Property Name="id_service" Type="Int64" />
+    <Property Name="price" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="HotelModel.FK_Reservations_Clients" FromRole="Reservation" ToRole="Client" />
+    <NavigationProperty Name="Room" Relationship="HotelModel.FK_Reservations_Rooms" FromRole="Reservation" ToRole="Room" />
+    <NavigationProperty Name="Service" Relationship="HotelModel.FK_Reservations_Services" FromRole="Reservation" ToRole="Service" />
+    <Property Name="deleted" Type="Int64" />
+  </EntityType>
+  <Association Name="FK_Clients_Users">
+    <End Type="HotelModel.User" Role="User" Multiplicity="1" />
+    <End Type="HotelModel.Client" Role="Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservations_Clients">
+    <End Type="HotelModel.Client" Role="Client" Multiplicity="1" />
+    <End Type="HotelModel.Reservation" Role="Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="id_client" />
+      </Principal>
+      <Dependent Role="Reservation">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservations_Rooms">
+    <End Type="HotelModel.Room" Role="Room" Multiplicity="1" />
+    <End Type="HotelModel.Reservation" Role="Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="id_room" />
+      </Principal>
+      <Dependent Role="Reservation">
+        <PropertyRef Name="id_room" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservations_Services">
+    <End Type="HotelModel.Service" Role="Service" Multiplicity="0..1" />
+    <End Type="HotelModel.Reservation" Role="Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="id_service" />
+      </Principal>
+      <Dependent Role="Reservation">
+        <PropertyRef Name="id_service" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

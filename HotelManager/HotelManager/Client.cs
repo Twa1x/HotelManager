@@ -12,19 +12,18 @@ namespace HotelManager
     using System;
     using System.Collections.Generic;
     
-    public partial class Service
+    public partial class Client
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Service()
+        public Client()
         {
             this.Reservations = new HashSet<Reservation>();
         }
     
-        public long id_service { get; set; }
-        public string name { get; set; }
-        public double price { get; set; }
-        public long deleted { get; set; }
+        public long id_client { get; set; }
+        public long id_user { get; set; }
     
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservation> Reservations { get; set; }
     }

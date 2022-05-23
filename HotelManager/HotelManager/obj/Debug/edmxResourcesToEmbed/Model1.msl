@@ -58,5 +58,30 @@
     <FunctionImportMapping FunctionImportName="sp_update_room" FunctionName="HotelModel.Store.sp_update_room" />
     <FunctionImportMapping FunctionImportName="sp_update_service" FunctionName="HotelModel.Store.sp_update_service" />
     <FunctionImportMapping FunctionImportName="sp_update_offer" FunctionName="HotelModel.Store.sp_update_offer" />
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="HotelModel.Client">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reservations">
+      <EntityTypeMapping TypeName="HotelModel.Reservation">
+        <MappingFragment StoreEntitySet="Reservations">
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="id_service" ColumnName="id_service" />
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="id_room" ColumnName="id_room" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="date_end" ColumnName="date_end" />
+          <ScalarProperty Name="date_start" ColumnName="date_start" />
+          <ScalarProperty Name="id_reservation" ColumnName="id_reservation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_insert_client" FunctionName="HotelModel.Store.sp_insert_client" />
+    <FunctionImportMapping FunctionImportName="sp_insert_reservation" FunctionName="HotelModel.Store.sp_insert_reservation" />
   </EntityContainerMapping>
 </Mapping>

@@ -18,6 +18,7 @@ namespace HotelManager
         public Room()
         {
             this.Offers = new HashSet<Offer>();
+            this.Reservations = new HashSet<Reservation>();
         }
     
         public long id_room { get; set; }
@@ -32,5 +33,7 @@ namespace HotelManager
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Offer> Offers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }

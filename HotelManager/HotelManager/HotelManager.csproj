@@ -77,6 +77,9 @@
     <Compile Include="AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Client.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="DetailsRoomWindow.xaml.cs">
       <DependentUpon>DetailsRoomWindow.xaml</DependentUpon>
     </Compile>
@@ -132,6 +135,9 @@
     </Compile>
     <Compile Include="PasswordHelper.cs" />
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="Reservation.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Room.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

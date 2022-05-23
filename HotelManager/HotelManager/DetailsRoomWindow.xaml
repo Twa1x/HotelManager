@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="DetailsRoomWindow" Height="450" Width="800">
     <Grid>
-        
+        <Image Source="{Binding CurrentRoomGuest.Image1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="285,198,315,62"/>
+        <Image Source="{Binding CurrentRoomGuest.Image2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="35,201,552,60"/>
+        <Image Source="{Binding CurrentRoomGuest.Image3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="544,198,56,62"/>
+        <Label Content="Price" Margin="10,10,573,359" Background="#FF84FF86" FontSize="20" FontStyle="Italic" FontFamily="Bahnschrift"/>
+        <TextBox TextWrapping="Wrap" IsReadOnly="True" Text="{Binding CurrentRoomGuest.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="242,91,415,278"/>
+        <Label Content="Type" Margin="10,91,573,278" Background="#FF84FF86" FontSize="20" FontStyle="Italic" FontFamily="Bahnschrift"/>
+        <Label Content="Price" Margin="10,10,573,359" Background="#FF84FF86" FontSize="20" FontStyle="Italic" FontFamily="Bahnschrift"/>
+        <TextBox TextWrapping="Wrap"  IsReadOnly="True" Text="{Binding CurrentRoomGuest.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="242,10,415,359"/>
+        <Label Content="Aditional Services" Margin="412,58,181,310" Background="#FF84FF86" FontSize="20" FontStyle="Italic" FontFamily="Bahnschrift"/>
+        <TextBox TextWrapping="Wrap"  IsReadOnly="True" Text="{Binding CurrentRoomGuest.AditionalServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="644,59,30,310"/>
+
     </Grid>
 </Window>

@@ -31,6 +31,8 @@ namespace HotelManager
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<Offer> Offers { get; set; }
+        public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<Reservation> Reservations { get; set; }
     
         public virtual ObjectResult<sp_get_users_Result> sp_get_users()
         {
@@ -242,6 +244,52 @@ namespace HotelManager
                 new ObjectParameter("deleted", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_update_offer", room_idParameter, offer_idParameter, nameParameter, descriptionParameter, priceParameter, date_startParameter, date_endParameter, deletedParameter);
+        }
+    
+        public virtual int sp_insert_client(Nullable<long> id_user)
+        {
+            var id_userParameter = id_user.HasValue ?
+                new ObjectParameter("id_user", id_user) :
+                new ObjectParameter("id_user", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_client", id_userParameter);
+        }
+    
+        public virtual int sp_insert_reservation(Nullable<System.DateTime> date_start, Nullable<System.DateTime> date_end, string status, Nullable<long> id_room, Nullable<long> id_client, Nullable<long> id_service, Nullable<double> price, Nullable<long> deleted)
+        {
+            var date_startParameter = date_start.HasValue ?
+                new ObjectParameter("date_start", date_start) :
+                new ObjectParameter("date_start", typeof(System.DateTime));
+    
+            var date_endParameter = date_end.HasValue ?
+                new ObjectParameter("date_end", date_end) :
+                new ObjectParameter("date_end", typeof(System.DateTime));
+    
+            var statusParameter = status != null ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(string));
+    
+            var id_roomParameter = id_room.HasValue ?
+                new ObjectParameter("id_room", id_room) :
+                new ObjectParameter("id_room", typeof(long));
+    
+            var id_clientParameter = id_client.HasValue ?
+                new ObjectParameter("id_client", id_client) :
+                new ObjectParameter("id_client", typeof(long));
+    
+            var id_serviceParameter = id_service.HasValue ?
+                new ObjectParameter("id_service", id_service) :
+                new ObjectParameter("id_service", typeof(long));
+    
+            var priceParameter = price.HasValue ?
+                new ObjectParameter("price", price) :
+                new ObjectParameter("price", typeof(double));
+    
+            var deletedParameter = deleted.HasValue ?
+                new ObjectParameter("deleted", deleted) :
+                new ObjectParameter("deleted", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_reservation", date_startParameter, date_endParameter, statusParameter, id_roomParameter, id_clientParameter, id_serviceParameter, priceParameter, deletedParameter);
         }
     }
 }

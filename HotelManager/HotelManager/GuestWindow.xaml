@@ -32,9 +32,9 @@
         <Label Content="Rooms Details" Margin="325,10,249,372" FontSize="16" FontFamily="Bahnschrift"/>
         <Button  Command="{Binding DetailRoomCommand}" Name="DetailsBtn" IsEnabled="False" Content="Details" Margin="581,107,78,280" RenderTransformOrigin="0.542,-0.253"/>
         <Label Content="Date Start&#xD;&#xA;(dd-mm-yyyy)" Margin="10,337,645,36"/>
-        <TextBox TextWrapping="Wrap" Margin="10,379,645,18"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding DateStart,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10,379,645,18"/>
         <Label Content="Date End&#xD;&#xA;(dd-mm-yyyy)" Margin="195,337,460,36"/>
-        <TextBox TextWrapping="Wrap" Margin="195,379,460,18"/>
-        <Button Content="Search" Margin="364,370,318,10"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding DateEnd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="195,379,460,18"/>
+        <Button Content="Search" Command="{Binding SearchCommand}" Margin="364,370,318,10"/>
     </Grid>
 </Window>

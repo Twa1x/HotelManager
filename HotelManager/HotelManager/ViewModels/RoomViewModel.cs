@@ -15,6 +15,14 @@ namespace HotelManager.ViewModels
     {
         public RoomModel roomModel { get; private set; }
 
+        private RoomModel tempRoom;
+        public RoomModel TempRoom
+
+        {
+            get { return tempRoom; }
+            set { OnPropertyChanged(ref tempRoom, value); }
+        }
+
         private RoomModel currentRoom;
         public RoomModel CurrentRoom
         {
@@ -24,6 +32,7 @@ namespace HotelManager.ViewModels
 
 
         public ICommand AddCommand { get; }
+        public ICommand EditCommand { get; }
         public ICommand SelectImage1Command { get; }
         public ICommand SelectImage2Command { get; }
         public ICommand SelectImage3Command { get; }
@@ -34,13 +43,20 @@ namespace HotelManager.ViewModels
             roomModel = new RoomModel();
             roomModel.Avilabilty = true;
             AddCommand = new RelayCommand(Add);
+            EditCommand = new RelayCommand(Edit);
             SelectImage1Command = new RelayCommand(SelectImage1);
             SelectImage2Command = new RelayCommand(SelectImage2);
             SelectImage3Command = new RelayCommand(SelectImage3);
 
         }
 
-
+        private void Edit()
+        {
+            tempRoom = currentRoom;  
+            Console.WriteLine(tempRoom.Type);
+            EditRooms editRooms = new EditRooms();
+            editRooms.Show();
+        }
 
         public ObservableCollection<RoomModel> Rooms { get; set; }
         private ObservableCollection<RoomModel> LoadRooms()
@@ -58,6 +74,7 @@ namespace HotelManager.ViewModels
                 tempRoomModel.Image1 = item.image1;
                 tempRoomModel.Image2 = item.image2;
                 tempRoomModel.Image3 = item.image3;
+                tempRoomModel.Id = Convert.ToInt32(item.id_room);
                 tempRooms.Add(tempRoomModel);
             }
             return tempRooms;

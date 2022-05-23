@@ -77,8 +77,14 @@
     <Compile Include="AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DetailsRoomWindow.xaml.cs">
+      <DependentUpon>DetailsRoomWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditOffersWindow.xaml.cs">
       <DependentUpon>EditOffersWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditRooms.xaml.cs">
+      <DependentUpon>EditRooms.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditRoomsWindow.xaml.cs">
       <DependentUpon>EditRoomsWindow.xaml</DependentUpon>
@@ -139,6 +145,7 @@
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AdminViewModel.cs" />
+    <Compile Include="ViewModels\GuestViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\OffersViewModel.cs" />
@@ -161,7 +168,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DetailsRoomWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditOffersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditRooms.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -285,6 +300,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\guestBackground.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

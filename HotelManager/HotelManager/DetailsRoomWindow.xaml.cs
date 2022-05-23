@@ -15,18 +15,13 @@ using System.Windows.Shapes;
 namespace HotelManager
 {
     /// <summary>
-    /// Interaction logic for EditRoomsWindow.xaml
+    /// Interaction logic for DetailsRoomWindow.xaml
     /// </summary>
-    public partial class EditRoomsWindow : Window
+    public partial class DetailsRoomWindow : Window
     {
-        public EditRoomsWindow()
+        public DetailsRoomWindow()
         {
             InitializeComponent();
-        }
-
-        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            EditBtn.IsEnabled = true;
         }
     }
 }

@@ -10,6 +10,13 @@ namespace HotelManager.Models
     {
         private string _name;
         private string _price;
+        private int _id;
+
+        public int Id
+        {
+            get { return _id; }
+            set { OnPropertyChanged(ref _id, value); }  
+        }
 
         public string Name
         {

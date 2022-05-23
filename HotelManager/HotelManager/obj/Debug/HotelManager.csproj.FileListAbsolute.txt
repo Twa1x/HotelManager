@@ -90,3 +90,7 @@ C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\
 C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\EditRooms.baml
 C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\DetailsRoomWindow.g.cs
 C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\DetailsRoomWindow.baml
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\EditServices.g.cs
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\EditServices.baml
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\EditOffers.g.cs
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\EditOffers.baml

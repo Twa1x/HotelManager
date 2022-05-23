@@ -80,6 +80,9 @@
     <Compile Include="DetailsRoomWindow.xaml.cs">
       <DependentUpon>DetailsRoomWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditOffers.xaml.cs">
+      <DependentUpon>EditOffers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditOffersWindow.xaml.cs">
       <DependentUpon>EditOffersWindow.xaml</DependentUpon>
     </Compile>
@@ -88,6 +91,9 @@
     </Compile>
     <Compile Include="EditRoomsWindow.xaml.cs">
       <DependentUpon>EditRoomsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditServices.xaml.cs">
+      <DependentUpon>EditServices.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditServicesWindow.xaml.cs">
       <DependentUpon>EditServicesWindow.xaml</DependentUpon>
@@ -172,6 +178,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="EditOffers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditOffersWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -181,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditRoomsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditServices.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

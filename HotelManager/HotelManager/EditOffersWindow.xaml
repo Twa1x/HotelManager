@@ -22,10 +22,13 @@
             </DataGrid.Columns>
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
-
+                    <EventSetter Event="MouseDoubleClick" 
+                                     Handler="DataGridRow_MouseDoubleClick"/>
                 </Style>
             </DataGrid.RowStyle>
         </DataGrid>
+        <Button x:Name="EditBtn" Command="{Binding EditCommand}" IsEnabled="False" Content="Edit Selected" HorizontalAlignment="Left" Margin="111,343,0,0" VerticalAlignment="Top" Height="29" Width="87"/>
+        <Button x:Name="DeleteBtn" Command="{Binding DeleteCommand}" IsEnabled="False" Content="Delete Selected" HorizontalAlignment="Left" Margin="313,343,0,0" VerticalAlignment="Top" Height="29" Width="87"/>
 
 
     </Grid>

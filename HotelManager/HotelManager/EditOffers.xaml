@@ -1,0 +1,25 @@
+﻿<Window x:Class="HotelManager.EditOffers"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HotelManager"
+        mc:Ignorable="d"
+        Title="EditOffers" Height="450" Width="800">
+    <Grid Margin="107,0,-107,0">
+        <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,94,0,0" Background="#FF277B80" Width="178" Height="33" FontSize="16" Foreground="#FFB0B0B0"/>
+        <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding TempOffer.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="178" Margin="30,132,0,0" RenderTransformOrigin="0.501,-0.446" BorderBrush="#FFEF0000" />
+        <Label Content="Description" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,168,0,0" Background="#FF277B80" Width="178" Height="33" FontSize="16" Foreground="#FFB0B0B0"/>
+        <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding TempOffer.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="178" Margin="30,0,0,0" RenderTransformOrigin="0.501,-0.446" BorderBrush="#FFEF0000" />
+        <Label Content="Price" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,255,0,0" Background="#FF277B80" Width="178" Height="33" FontSize="16" Foreground="#FFB0B0B0"/>
+        <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding TempOffer.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="178" Margin="30,293,0,0" RenderTransformOrigin="0.501,-0.446" BorderBrush="#FFEF0000" />
+        <Label Content="Date Start" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,94,0,0" Background="#FF277B80" Width="178" Height="33" FontSize="16" Foreground="#FFB0B0B0"/>
+        <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding TempOffer.DateStart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="178" Margin="292,132,0,0" RenderTransformOrigin="0.501,-0.446" BorderBrush="#FFEF0000" />
+        <Label Content="Date End" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,168,0,0" Background="#FF277B80" Width="178" Height="33" FontSize="16" Foreground="#FFB0B0B0"/>
+        <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding TempOffer.DateEnd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="178" Margin="292,0,0,0" RenderTransformOrigin="0.501,-0.446" BorderBrush="#FFEF0000" />
+        <Label Content="Room Id" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,255,0,0" Background="#FF277B80" Width="178" Height="33" FontSize="16" Foreground="#FFB0B0B0"/>
+        <Button Command="{Binding UpdateCommand}" Content="Update" Margin="161,341,419,27"/>
+        <TextBox  HorizontalAlignment="Left" Height="22" TextWrapping="Wrap"  Text ="{Binding TempOffer.RoomId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="178" Margin="292,294,0,0" RenderTransformOrigin="0.501,-0.446" />
+
+    </Grid>
+</Window>

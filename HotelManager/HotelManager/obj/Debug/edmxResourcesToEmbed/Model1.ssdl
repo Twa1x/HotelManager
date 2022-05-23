@@ -22,9 +22,10 @@
     <Property Name="availabilty" Type="bigint" Nullable="false" />
     <Property Name="aditional_services" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="price" Type="float" Nullable="false" />
-    <Property Name="image1" Type="varchar" MaxLength="50" />
-    <Property Name="image2" Type="varchar" MaxLength="50" />
-    <Property Name="image3" Type="varchar" MaxLength="50" />
+    <Property Name="image1" Type="varchar" MaxLength="200" />
+    <Property Name="image2" Type="varchar" MaxLength="200" />
+    <Property Name="image3" Type="varchar" MaxLength="200" />
+    <Property Name="deleted" Type="bigint" />
   </EntityType>
   <EntityType Name="Services">
     <Key>
@@ -74,6 +75,7 @@
     <Parameter Name="image1" Type="varchar" Mode="In" />
     <Parameter Name="image2" Type="varchar" Mode="In" />
     <Parameter Name="image3" Type="varchar" Mode="In" />
+    <Parameter Name="deleted" Type="bigint" Mode="In" />
   </Function>
   <Function Name="sp_insert_service" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="name" Type="varchar" Mode="In" />
@@ -85,6 +87,33 @@
     <Parameter Name="password" Type="varchar" Mode="In" />
     <Parameter Name="email" Type="varchar" Mode="In" />
     <Parameter Name="type" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_update_offer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="room_id" Type="bigint" Mode="In" />
+    <Parameter Name="offer_id" Type="bigint" Mode="In" />
+    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="description" Type="varchar" Mode="In" />
+    <Parameter Name="price" Type="float" Mode="In" />
+    <Parameter Name="date_start" Type="date" Mode="In" />
+    <Parameter Name="date_end" Type="date" Mode="In" />
+    <Parameter Name="deleted" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_update_room" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="room_id" Type="int" Mode="In" />
+    <Parameter Name="type" Type="varchar" Mode="In" />
+    <Parameter Name="availabilty" Type="bigint" Mode="In" />
+    <Parameter Name="aditional_services" Type="varchar" Mode="In" />
+    <Parameter Name="price" Type="float" Mode="In" />
+    <Parameter Name="image1" Type="varchar" Mode="In" />
+    <Parameter Name="image2" Type="varchar" Mode="In" />
+    <Parameter Name="image3" Type="varchar" Mode="In" />
+    <Parameter Name="deleted" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_update_service" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="service_id" Type="int" Mode="In" />
+    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="price" Type="float" Mode="In" />
+    <Parameter Name="deleted" Type="bigint" Mode="In" />
   </Function>
   <EntityContainer Name="HotelModelStoreContainer">
     <EntitySet Name="Offers" EntityType="Self.Offers" Schema="dbo" store:Type="Tables" />

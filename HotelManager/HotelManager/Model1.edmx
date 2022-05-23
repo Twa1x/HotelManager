@@ -27,9 +27,10 @@
           <Property Name="availabilty" Type="bigint" Nullable="false" />
           <Property Name="aditional_services" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="price" Type="float" Nullable="false" />
-          <Property Name="image1" Type="varchar" MaxLength="50" />
-          <Property Name="image2" Type="varchar" MaxLength="50" />
-          <Property Name="image3" Type="varchar" MaxLength="50" />
+          <Property Name="image1" Type="varchar" MaxLength="200" />
+          <Property Name="image2" Type="varchar" MaxLength="200" />
+          <Property Name="image3" Type="varchar" MaxLength="200" />
+          <Property Name="deleted" Type="bigint" />
         </EntityType>
         <EntityType Name="Services">
           <Key>
@@ -79,6 +80,7 @@
           <Parameter Name="image1" Type="varchar" Mode="In" />
           <Parameter Name="image2" Type="varchar" Mode="In" />
           <Parameter Name="image3" Type="varchar" Mode="In" />
+          <Parameter Name="deleted" Type="bigint" Mode="In" />
         </Function>
         <Function Name="sp_insert_service" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="name" Type="varchar" Mode="In" />
@@ -90,6 +92,33 @@
           <Parameter Name="password" Type="varchar" Mode="In" />
           <Parameter Name="email" Type="varchar" Mode="In" />
           <Parameter Name="type" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_update_offer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="room_id" Type="bigint" Mode="In" />
+          <Parameter Name="offer_id" Type="bigint" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="description" Type="varchar" Mode="In" />
+          <Parameter Name="price" Type="float" Mode="In" />
+          <Parameter Name="date_start" Type="date" Mode="In" />
+          <Parameter Name="date_end" Type="date" Mode="In" />
+          <Parameter Name="deleted" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="sp_update_room" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="room_id" Type="int" Mode="In" />
+          <Parameter Name="type" Type="varchar" Mode="In" />
+          <Parameter Name="availabilty" Type="bigint" Mode="In" />
+          <Parameter Name="aditional_services" Type="varchar" Mode="In" />
+          <Parameter Name="price" Type="float" Mode="In" />
+          <Parameter Name="image1" Type="varchar" Mode="In" />
+          <Parameter Name="image2" Type="varchar" Mode="In" />
+          <Parameter Name="image3" Type="varchar" Mode="In" />
+          <Parameter Name="deleted" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="sp_update_service" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="service_id" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="price" Type="float" Mode="In" />
+          <Parameter Name="deleted" Type="bigint" Mode="In" />
         </Function>
         <EntityContainer Name="HotelModelStoreContainer">
           <EntitySet Name="Offers" EntityType="Self.Offers" Schema="dbo" store:Type="Tables" />
@@ -114,10 +143,11 @@
           <Property Name="availabilty" Type="Int64" Nullable="false" />
           <Property Name="aditional_services" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="price" Type="Double" Nullable="false" />
-          <Property Name="image1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="image2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="image3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="image1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="image2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="image3" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Offers" Relationship="HotelModel.FK_Offers_Rooms" FromRole="Room" ToRole="Offer" />
+          <Property Name="deleted" Type="Int64" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -141,6 +171,7 @@
             <Parameter Name="image1" Mode="In" Type="String" />
             <Parameter Name="image2" Mode="In" Type="String" />
             <Parameter Name="image3" Mode="In" Type="String" />
+            <Parameter Name="deleted" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="sp_insert_user">
             <Parameter Name="username" Mode="In" Type="String" />
@@ -166,6 +197,33 @@
             <Parameter Name="date_start" Mode="In" Type="DateTime" />
             <Parameter Name="date_end" Mode="In" Type="DateTime" />
             <Parameter Name="room_id" Mode="In" Type="Int64" />
+            <Parameter Name="deleted" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="sp_update_room">
+            <Parameter Name="room_id" Mode="In" Type="Int32" />
+            <Parameter Name="type" Mode="In" Type="String" />
+            <Parameter Name="availabilty" Mode="In" Type="Int64" />
+            <Parameter Name="aditional_services" Mode="In" Type="String" />
+            <Parameter Name="price" Mode="In" Type="Double" />
+            <Parameter Name="image1" Mode="In" Type="String" />
+            <Parameter Name="image2" Mode="In" Type="String" />
+            <Parameter Name="image3" Mode="In" Type="String" />
+            <Parameter Name="deleted" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="sp_update_service">
+            <Parameter Name="service_id" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="price" Mode="In" Type="Double" />
+            <Parameter Name="deleted" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="sp_update_offer">
+            <Parameter Name="room_id" Mode="In" Type="Int64" />
+            <Parameter Name="offer_id" Mode="In" Type="Int64" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="price" Mode="In" Type="Double" />
+            <Parameter Name="date_start" Mode="In" Type="DateTime" />
+            <Parameter Name="date_end" Mode="In" Type="DateTime" />
             <Parameter Name="deleted" Mode="In" Type="Int64" />
           </FunctionImport>
         </EntityContainer>
@@ -220,6 +278,7 @@
           <EntitySetMapping Name="Rooms">
             <EntityTypeMapping TypeName="HotelModel.Room">
               <MappingFragment StoreEntitySet="Rooms">
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
                 <ScalarProperty Name="id_room" ColumnName="id_room" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="availabilty" ColumnName="availabilty" />
@@ -270,6 +329,9 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_insert_offer" FunctionName="HotelModel.Store.sp_insert_offer" />
+          <FunctionImportMapping FunctionImportName="sp_update_room" FunctionName="HotelModel.Store.sp_update_room" />
+          <FunctionImportMapping FunctionImportName="sp_update_service" FunctionName="HotelModel.Store.sp_update_service" />
+          <FunctionImportMapping FunctionImportName="sp_update_offer" FunctionName="HotelModel.Store.sp_update_offer" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

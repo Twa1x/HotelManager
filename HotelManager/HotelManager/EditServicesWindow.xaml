@@ -19,10 +19,13 @@
             </DataGrid.Columns>
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
-
+                    <EventSetter Event="MouseDoubleClick" 
+                                     Handler="DataGridRow_MouseDoubleClick"/>
                 </Style>
             </DataGrid.RowStyle>
         </DataGrid>
+        <Button Name="edit" Command="{Binding EditCommand}" IsEnabled="False" Content="Edit Selected" Margin="262,350,424,34"/>
+        <Button Name="delete" Command="{Binding DeleteCommand}" IsEnabled ="False" Content="Delete Selected" Margin="421,350,265,34"/>
 
 
     </Grid>

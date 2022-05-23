@@ -9,10 +9,11 @@
     <Property Name="availabilty" Type="Int64" Nullable="false" />
     <Property Name="aditional_services" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="price" Type="Double" Nullable="false" />
-    <Property Name="image1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="image2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="image3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="image1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="image2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="image3" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Offers" Relationship="HotelModel.FK_Offers_Rooms" FromRole="Room" ToRole="Offer" />
+    <Property Name="deleted" Type="Int64" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -36,6 +37,7 @@
       <Parameter Name="image1" Mode="In" Type="String" />
       <Parameter Name="image2" Mode="In" Type="String" />
       <Parameter Name="image3" Mode="In" Type="String" />
+      <Parameter Name="deleted" Mode="In" Type="Int64" />
     </FunctionImport>
     <FunctionImport Name="sp_insert_user">
       <Parameter Name="username" Mode="In" Type="String" />
@@ -61,6 +63,33 @@
       <Parameter Name="date_start" Mode="In" Type="DateTime" />
       <Parameter Name="date_end" Mode="In" Type="DateTime" />
       <Parameter Name="room_id" Mode="In" Type="Int64" />
+      <Parameter Name="deleted" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_update_room">
+      <Parameter Name="room_id" Mode="In" Type="Int32" />
+      <Parameter Name="type" Mode="In" Type="String" />
+      <Parameter Name="availabilty" Mode="In" Type="Int64" />
+      <Parameter Name="aditional_services" Mode="In" Type="String" />
+      <Parameter Name="price" Mode="In" Type="Double" />
+      <Parameter Name="image1" Mode="In" Type="String" />
+      <Parameter Name="image2" Mode="In" Type="String" />
+      <Parameter Name="image3" Mode="In" Type="String" />
+      <Parameter Name="deleted" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_update_service">
+      <Parameter Name="service_id" Mode="In" Type="Int32" />
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="price" Mode="In" Type="Double" />
+      <Parameter Name="deleted" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_update_offer">
+      <Parameter Name="room_id" Mode="In" Type="Int64" />
+      <Parameter Name="offer_id" Mode="In" Type="Int64" />
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="price" Mode="In" Type="Double" />
+      <Parameter Name="date_start" Mode="In" Type="DateTime" />
+      <Parameter Name="date_end" Mode="In" Type="DateTime" />
       <Parameter Name="deleted" Mode="In" Type="Int64" />
     </FunctionImport>
   </EntityContainer>

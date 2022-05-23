@@ -33,6 +33,9 @@ namespace HotelManager.ViewModels
 
         public ICommand AddCommand { get; }
         public ICommand EditCommand { get; }
+        public ICommand UpdateCommand { get; }
+
+        public ICommand DeleteCommand { get; }
         public ICommand SelectImage1Command { get; }
         public ICommand SelectImage2Command { get; }
         public ICommand SelectImage3Command { get; }
@@ -44,17 +47,37 @@ namespace HotelManager.ViewModels
             roomModel.Avilabilty = true;
             AddCommand = new RelayCommand(Add);
             EditCommand = new RelayCommand(Edit);
+            UpdateCommand = new RelayCommand(Update);
+            DeleteCommand = new RelayCommand(Delete);
             SelectImage1Command = new RelayCommand(SelectImage1);
             SelectImage2Command = new RelayCommand(SelectImage2);
             SelectImage3Command = new RelayCommand(SelectImage3);
 
         }
 
+        private void Delete()
+        {
+            tempRoom = currentRoom;
+            HotelEntities hotelEntities = new HotelEntities();
+            hotelEntities.sp_update_room(tempRoom.Id, tempRoom.Type, Convert.ToInt32(tempRoom.Avilabilty), tempRoom.AditionalServices, Convert.ToDouble(tempRoom.Price), tempRoom.Image1, tempRoom.Image2, tempRoom.Image3, 1);
+            MessageBox.Show("Deleted Succesfully!");
+           
+        }
+
+        private void Update()
+        {
+            
+            HotelEntities hotelEntities = new HotelEntities();
+            hotelEntities.sp_update_room(tempRoom.Id, tempRoom.Type, Convert.ToInt32(tempRoom.Avilabilty), tempRoom.AditionalServices, Convert.ToDouble(tempRoom.Price), tempRoom.Image1, tempRoom.Image2, tempRoom.Image3, 0);
+            MessageBox.Show("Updated Succesfully!");
+        }
+
         private void Edit()
         {
-            tempRoom = currentRoom;  
-            Console.WriteLine(tempRoom.Type);
+            tempRoom = currentRoom;
+            
             EditRooms editRooms = new EditRooms();
+            editRooms.DataContext = this;
             editRooms.Show();
         }
 
@@ -66,16 +89,19 @@ namespace HotelManager.ViewModels
             List<Room> listRooms = hotelEntities.Rooms.ToList();
             foreach (var item in listRooms)
             {
-                RoomModel tempRoomModel = new RoomModel();
-                tempRoomModel.Type = item.type;
-                tempRoomModel.Avilabilty = Convert.ToBoolean(item.availabilty);
-                tempRoomModel.AditionalServices = item.aditional_services;
-                tempRoomModel.Price = Convert.ToString(item.price);
-                tempRoomModel.Image1 = item.image1;
-                tempRoomModel.Image2 = item.image2;
-                tempRoomModel.Image3 = item.image3;
-                tempRoomModel.Id = Convert.ToInt32(item.id_room);
-                tempRooms.Add(tempRoomModel);
+                if (item.deleted == 0 || item.deleted == null)
+                {
+                    RoomModel tempRoomModel = new RoomModel();
+                    tempRoomModel.Type = item.type;
+                    tempRoomModel.Avilabilty = Convert.ToBoolean(item.availabilty);
+                    tempRoomModel.AditionalServices = item.aditional_services;
+                    tempRoomModel.Price = Convert.ToString(item.price);
+                    tempRoomModel.Image1 = item.image1;
+                    tempRoomModel.Image2 = item.image2;
+                    tempRoomModel.Image3 = item.image3;
+                    tempRoomModel.Id = Convert.ToInt32(item.id_room);
+                    tempRooms.Add(tempRoomModel);
+                }
             }
             return tempRooms;
         }
@@ -92,7 +118,7 @@ namespace HotelManager.ViewModels
                 HotelEntities hotelEntities = new HotelEntities();
 
                 hotelEntities.sp_insert_room(roomModel.Type, Convert.ToInt32(roomModel.Avilabilty),
-                    roomModel.AditionalServices, Convert.ToDouble(roomModel.Price), roomModel.Image1, roomModel.Image2, roomModel.Image3);
+                    roomModel.AditionalServices, Convert.ToDouble(roomModel.Price), roomModel.Image1, roomModel.Image2, roomModel.Image3, 0);
                 MessageBox.Show("Room added succesfully!!");
             }
         }
@@ -104,6 +130,7 @@ namespace HotelManager.ViewModels
             if (openFileDialog.ShowDialog() == true)
             {
                 roomModel.Image3 = openFileDialog.FileName;
+                tempRoom.Image3 = openFileDialog.FileName;
             }
         }
 
@@ -113,6 +140,7 @@ namespace HotelManager.ViewModels
             if (openFileDialog.ShowDialog() == true)
             {
                 roomModel.Image2 = openFileDialog.FileName;
+                tempRoom.Image2 = openFileDialog.FileName;
             }
         }
 
@@ -123,6 +151,7 @@ namespace HotelManager.ViewModels
             if (openFileDialog.ShowDialog() == true)
             {
                 roomModel.Image1 = openFileDialog.FileName;
+                tempRoom.Image1 = openFileDialog.FileName;
             }
         }
 

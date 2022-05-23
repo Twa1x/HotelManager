@@ -6,18 +6,16 @@
             xmlns:viewmodels="clr-namespace:HotelManager.ViewModels"
         mc:Ignorable="d"
         Title="EditRooms" Height="450" Width="800">
-    <Window.DataContext>
-        <viewmodels:RoomViewModel/>
-    </Window.DataContext>
+    
 
-    <Grid DataContext="{Binding TempRoom}">
+    <Grid >
         <Label Content="Type of room&#xD;&#xA;(Single/Double/Triple)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,72,0,0" Background="#FF277B80" Width="178" Height="55" FontSize="16" Foreground="#FFB0B0B0"/>
-        <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="178" Margin="30,132,0,0" />
+        <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding TempRoom.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="178" Margin="30,132,0,0" />
         <Label Content="Price" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,161,0,0" Background="#FF277B80" Width="178" Height="33" FontSize="16" Foreground="#FFB0B0B0"/>
-        <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding  Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="178" Margin="30,0,0,0" />
+        <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding  TempRoom.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="178" Margin="30,0,0,0" />
         <Label Content="Aditional Services&#xD;&#xA;(Fridge/AC/Breakfast)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,234,0,0" Background="#FF277B80" Width="178" Height="66" FontSize="16" Foreground="#FFB0B0B0"/>
-        <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding AditionalServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="178" Margin="30,305,0,0" />
-        <Button Content="Add" Margin="63,333,625,27" Command="{Binding AddCommand}"/>
+        <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding TempRoom.AditionalServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="178" Margin="30,305,0,0" />
+        <Button  Content="Update" Margin="63,333,625,27" Command="{Binding UpdateCommand}"/>
         <Button Content="Select Image 1" Command="{Binding SelectImage1Command}" RenderTransformOrigin="0.5,0.5" Margin="262,209,426,160">
             <Button.RenderTransform>
                 <TransformGroup>
@@ -49,9 +47,9 @@
             </Button.RenderTransform>
         </Button>
         <Label Content="Select Images" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="385,144,0,0" Background="#FF277B80" Width="152" Height="34" FontSize="16" Foreground="#FFB0B0B0"/>
-        <Image Source="{Binding Image1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Height="100" Width="100" Margin="264,297,436,37"/>
-        <Image Source="{Binding Image2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="100" Width="100" Margin="411,297,289,37"/>
-        <Image Source="{Binding Image3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="100" Width="100" Margin="550,297,150,37"/>
+        <Image Source="{Binding TempRoom.Image1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Height="100" Width="100" Margin="264,297,436,37"/>
+        <Image Source="{Binding TempRoom.Image2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="100" Width="100" Margin="411,297,289,37"/>
+        <Image Source="{Binding TempRoom.Image3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="100" Width="100" Margin="550,297,150,37"/>
 
     </Grid>
 </Window>

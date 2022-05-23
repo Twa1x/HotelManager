@@ -40,11 +40,12 @@ namespace HotelManager.ViewModels
 
         private void CheckRooms()
         {
+            count = 0;
             HotelEntities hotelEntities = new HotelEntities();
             List<Room> rooms = hotelEntities.Rooms.ToList();
             foreach (Room room in rooms)
             {
-                if (room.availabilty != 0)
+                if (room.availabilty != 0 && (room.deleted == 0 || room.deleted == null) )
                     count++;
             }
 
@@ -59,7 +60,7 @@ namespace HotelManager.ViewModels
             List<Room> listRooms = hotelEntities.Rooms.ToList();
             foreach (var item in listRooms)
             {
-                if (item.availabilty > 0)
+                if (item.availabilty > 0 && (item.deleted == 0 || item.deleted == null))
                 {
                     RoomModel tempRoomModel = new RoomModel();
                     tempRoomModel.Type = item.type;

@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Rooms">
       <EntityTypeMapping TypeName="HotelModel.Room">
         <MappingFragment StoreEntitySet="Rooms">
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
           <ScalarProperty Name="id_room" ColumnName="id_room" />
           <ScalarProperty Name="type" ColumnName="type" />
           <ScalarProperty Name="availabilty" ColumnName="availabilty" />
@@ -54,5 +55,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="sp_insert_offer" FunctionName="HotelModel.Store.sp_insert_offer" />
+    <FunctionImportMapping FunctionImportName="sp_update_room" FunctionName="HotelModel.Store.sp_update_room" />
+    <FunctionImportMapping FunctionImportName="sp_update_service" FunctionName="HotelModel.Store.sp_update_service" />
+    <FunctionImportMapping FunctionImportName="sp_update_offer" FunctionName="HotelModel.Store.sp_update_offer" />
   </EntityContainerMapping>
 </Mapping>

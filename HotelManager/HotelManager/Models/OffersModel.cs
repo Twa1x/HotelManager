@@ -8,6 +8,7 @@ namespace HotelManager.Models
 {
     public class OffersModel : ObservableObject
     {
+        private int _id;
         private string _name;
         private string _description;
         private string _price;
@@ -20,6 +21,12 @@ namespace HotelManager.Models
         {
             get { return _name; }
             set { OnPropertyChanged(ref _name, value); }
+        }
+
+        public int Id
+        {
+            get { return _id; }
+            set { OnPropertyChanged(ref _id, value); }
         }
 
         public string Description

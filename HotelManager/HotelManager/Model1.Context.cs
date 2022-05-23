@@ -37,7 +37,7 @@ namespace HotelManager
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_get_users_Result>("sp_get_users");
         }
     
-        public virtual int sp_insert_room(string type, Nullable<long> availabilty, string aditional_services, Nullable<double> price, string image1, string image2, string image3)
+        public virtual int sp_insert_room(string type, Nullable<long> availabilty, string aditional_services, Nullable<double> price, string image1, string image2, string image3, Nullable<long> deleted)
         {
             var typeParameter = type != null ?
                 new ObjectParameter("type", type) :
@@ -67,7 +67,11 @@ namespace HotelManager
                 new ObjectParameter("image3", image3) :
                 new ObjectParameter("image3", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_room", typeParameter, availabiltyParameter, aditional_servicesParameter, priceParameter, image1Parameter, image2Parameter, image3Parameter);
+            var deletedParameter = deleted.HasValue ?
+                new ObjectParameter("deleted", deleted) :
+                new ObjectParameter("deleted", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_room", typeParameter, availabiltyParameter, aditional_servicesParameter, priceParameter, image1Parameter, image2Parameter, image3Parameter, deletedParameter);
         }
     
         public virtual int sp_insert_user(string username, string password, string email, string type)
@@ -139,6 +143,105 @@ namespace HotelManager
                 new ObjectParameter("deleted", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_offer", nameParameter, descriptionParameter, priceParameter, date_startParameter, date_endParameter, room_idParameter, deletedParameter);
+        }
+    
+        public virtual int sp_update_room(Nullable<int> room_id, string type, Nullable<long> availabilty, string aditional_services, Nullable<double> price, string image1, string image2, string image3, Nullable<long> deleted)
+        {
+            var room_idParameter = room_id.HasValue ?
+                new ObjectParameter("room_id", room_id) :
+                new ObjectParameter("room_id", typeof(int));
+    
+            var typeParameter = type != null ?
+                new ObjectParameter("type", type) :
+                new ObjectParameter("type", typeof(string));
+    
+            var availabiltyParameter = availabilty.HasValue ?
+                new ObjectParameter("availabilty", availabilty) :
+                new ObjectParameter("availabilty", typeof(long));
+    
+            var aditional_servicesParameter = aditional_services != null ?
+                new ObjectParameter("aditional_services", aditional_services) :
+                new ObjectParameter("aditional_services", typeof(string));
+    
+            var priceParameter = price.HasValue ?
+                new ObjectParameter("price", price) :
+                new ObjectParameter("price", typeof(double));
+    
+            var image1Parameter = image1 != null ?
+                new ObjectParameter("image1", image1) :
+                new ObjectParameter("image1", typeof(string));
+    
+            var image2Parameter = image2 != null ?
+                new ObjectParameter("image2", image2) :
+                new ObjectParameter("image2", typeof(string));
+    
+            var image3Parameter = image3 != null ?
+                new ObjectParameter("image3", image3) :
+                new ObjectParameter("image3", typeof(string));
+    
+            var deletedParameter = deleted.HasValue ?
+                new ObjectParameter("deleted", deleted) :
+                new ObjectParameter("deleted", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_update_room", room_idParameter, typeParameter, availabiltyParameter, aditional_servicesParameter, priceParameter, image1Parameter, image2Parameter, image3Parameter, deletedParameter);
+        }
+    
+        public virtual int sp_update_service(Nullable<int> service_id, string name, Nullable<double> price, Nullable<long> deleted)
+        {
+            var service_idParameter = service_id.HasValue ?
+                new ObjectParameter("service_id", service_id) :
+                new ObjectParameter("service_id", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var priceParameter = price.HasValue ?
+                new ObjectParameter("price", price) :
+                new ObjectParameter("price", typeof(double));
+    
+            var deletedParameter = deleted.HasValue ?
+                new ObjectParameter("deleted", deleted) :
+                new ObjectParameter("deleted", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_update_service", service_idParameter, nameParameter, priceParameter, deletedParameter);
+        }
+    
+        public virtual int sp_update_offer(Nullable<long> room_id, Nullable<long> offer_id, string name, string description, Nullable<double> price, Nullable<System.DateTime> date_start, Nullable<System.DateTime> date_end, Nullable<long> deleted)
+        {
+            var room_idParameter = room_id.HasValue ?
+                new ObjectParameter("room_id", room_id) :
+                new ObjectParameter("room_id", typeof(long));
+    
+            var offer_idParameter = offer_id.HasValue ?
+                new ObjectParameter("offer_id", offer_id) :
+                new ObjectParameter("offer_id", typeof(long));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
+    
+            var priceParameter = price.HasValue ?
+                new ObjectParameter("price", price) :
+                new ObjectParameter("price", typeof(double));
+    
+            var date_startParameter = date_start.HasValue ?
+                new ObjectParameter("date_start", date_start) :
+                new ObjectParameter("date_start", typeof(System.DateTime));
+    
+            var date_endParameter = date_end.HasValue ?
+                new ObjectParameter("date_end", date_end) :
+                new ObjectParameter("date_end", typeof(System.DateTime));
+    
+            var deletedParameter = deleted.HasValue ?
+                new ObjectParameter("deleted", deleted) :
+                new ObjectParameter("deleted", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_update_offer", room_idParameter, offer_idParameter, nameParameter, descriptionParameter, priceParameter, date_startParameter, date_endParameter, deletedParameter);
         }
     }
 }

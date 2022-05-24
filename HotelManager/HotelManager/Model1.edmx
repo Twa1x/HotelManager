@@ -12,6 +12,24 @@
           <Property Name="id_client" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_user" Type="bigint" Nullable="false" />
         </EntityType>
+        <EntityType Name="Features">
+          <Key>
+            <PropertyRef Name="id_feature" />
+          </Key>
+          <Property Name="id_feature" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="price" Type="float" Nullable="false" />
+          <Property Name="deleted" Type="int" />
+        </EntityType>
+        <EntityType Name="FeaturesRooms">
+          <Key>
+            <PropertyRef Name="id_features_rooms" />
+          </Key>
+          <Property Name="id_features_rooms" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_room" Type="bigint" Nullable="false" />
+          <Property Name="id_feature" Type="int" Nullable="false" />
+          <Property Name="deleted" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Offers">
           <Key>
             <PropertyRef Name="id_offer" />
@@ -84,6 +102,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FeaturesRooms_Features">
+          <End Role="Features" Type="Self.Features" Multiplicity="1" />
+          <End Role="FeaturesRooms" Type="Self.FeaturesRooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Features">
+              <PropertyRef Name="id_feature" />
+            </Principal>
+            <Dependent Role="FeaturesRooms">
+              <PropertyRef Name="id_feature" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeaturesRooms_Rooms">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
+          <End Role="FeaturesRooms" Type="Self.FeaturesRooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="id_room" />
+            </Principal>
+            <Dependent Role="FeaturesRooms">
+              <PropertyRef Name="id_room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Offers_Rooms">
           <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
           <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
@@ -135,6 +177,16 @@
         <Function Name="sp_insert_client" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_user" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="sp_insert_feature" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="price" Type="float" Mode="In" />
+          <Parameter Name="deleted" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_insert_feature_room" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="room_id" Type="bigint" Mode="In" />
+          <Parameter Name="feature_id" Type="int" Mode="In" />
+          <Parameter Name="deleted" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_insert_offer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="name" Type="varchar" Mode="In" />
           <Parameter Name="description" Type="varchar" Mode="In" />
@@ -175,6 +227,18 @@
           <Parameter Name="email" Type="varchar" Mode="In" />
           <Parameter Name="type" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="sp_update_feature" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="feature_id" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="price" Type="float" Mode="In" />
+          <Parameter Name="deleted" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_update_feature_room" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="feature_room_id" Type="int" Mode="In" />
+          <Parameter Name="feature_id" Type="int" Mode="In" />
+          <Parameter Name="room_id" Type="bigint" Mode="In" />
+          <Parameter Name="deleted" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_update_offer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="room_id" Type="bigint" Mode="In" />
           <Parameter Name="offer_id" Type="bigint" Mode="In" />
@@ -204,6 +268,8 @@
         </Function>
         <EntityContainer Name="HotelModelStoreContainer">
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Features" EntityType="Self.Features" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FeaturesRooms" EntityType="Self.FeaturesRooms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Offers" EntityType="Self.Offers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reservations" EntityType="Self.Reservations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
@@ -212,6 +278,14 @@
           <AssociationSet Name="FK_Clients_Users" Association="Self.FK_Clients_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeaturesRooms_Features" Association="Self.FK_FeaturesRooms_Features">
+            <End Role="Features" EntitySet="Features" />
+            <End Role="FeaturesRooms" EntitySet="FeaturesRooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeaturesRooms_Rooms" Association="Self.FK_FeaturesRooms_Rooms">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="FeaturesRooms" EntitySet="FeaturesRooms" />
           </AssociationSet>
           <AssociationSet Name="FK_Offers_Rooms" Association="Self.FK_Offers_Rooms">
             <End Role="Rooms" EntitySet="Rooms" />
@@ -249,6 +323,7 @@
           <NavigationProperty Name="Offers" Relationship="HotelModel.FK_Offers_Rooms" FromRole="Room" ToRole="Offer" />
           <Property Name="deleted" Type="Int64" />
           <NavigationProperty Name="Reservations" Relationship="HotelModel.FK_Reservations_Rooms" FromRole="Room" ToRole="Reservation" />
+          <NavigationProperty Name="FeaturesRooms" Relationship="HotelModel.FK_FeaturesRooms_Rooms" FromRole="Room" ToRole="FeaturesRoom" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -358,6 +433,38 @@
             <Parameter Name="id_service" Mode="In" Type="Int64" />
             <Parameter Name="price" Mode="In" Type="Double" />
             <Parameter Name="deleted" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <EntitySet Name="Features" EntityType="HotelModel.Feature" />
+          <EntitySet Name="FeaturesRooms" EntityType="HotelModel.FeaturesRoom" />
+          <AssociationSet Name="FK_FeaturesRooms_Features" Association="HotelModel.FK_FeaturesRooms_Features">
+            <End Role="Feature" EntitySet="Features" />
+            <End Role="FeaturesRoom" EntitySet="FeaturesRooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeaturesRooms_Rooms" Association="HotelModel.FK_FeaturesRooms_Rooms">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="FeaturesRoom" EntitySet="FeaturesRooms" />
+          </AssociationSet>
+          <FunctionImport Name="sp_insert_feature">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="price" Mode="In" Type="Double" />
+            <Parameter Name="deleted" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_insert_feature_room">
+            <Parameter Name="room_id" Mode="In" Type="Int64" />
+            <Parameter Name="feature_id" Mode="In" Type="Int32" />
+            <Parameter Name="deleted" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_update_feature">
+            <Parameter Name="feature_id" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="price" Mode="In" Type="Double" />
+            <Parameter Name="deleted" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_update_feature_room">
+            <Parameter Name="feature_room_id" Mode="In" Type="Int32" />
+            <Parameter Name="feature_id" Mode="In" Type="Int32" />
+            <Parameter Name="room_id" Mode="In" Type="Int64" />
+            <Parameter Name="deleted" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_get_users_Result">
@@ -477,6 +584,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Feature">
+          <Key>
+            <PropertyRef Name="id_feature" />
+          </Key>
+          <Property Name="id_feature" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="deleted" Type="Int32" />
+          <NavigationProperty Name="FeaturesRooms" Relationship="HotelModel.FK_FeaturesRooms_Features" FromRole="Feature" ToRole="FeaturesRoom" />
+        </EntityType>
+        <EntityType Name="FeaturesRoom">
+          <Key>
+            <PropertyRef Name="id_features_rooms" />
+          </Key>
+          <Property Name="id_features_rooms" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_room" Type="Int64" Nullable="false" />
+          <Property Name="id_feature" Type="Int32" Nullable="false" />
+          <Property Name="deleted" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Feature" Relationship="HotelModel.FK_FeaturesRooms_Features" FromRole="FeaturesRoom" ToRole="Feature" />
+          <NavigationProperty Name="Room" Relationship="HotelModel.FK_FeaturesRooms_Rooms" FromRole="FeaturesRoom" ToRole="Room" />
+        </EntityType>
+        <Association Name="FK_FeaturesRooms_Features">
+          <End Type="HotelModel.Feature" Role="Feature" Multiplicity="1" />
+          <End Type="HotelModel.FeaturesRoom" Role="FeaturesRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Feature">
+              <PropertyRef Name="id_feature" />
+            </Principal>
+            <Dependent Role="FeaturesRoom">
+              <PropertyRef Name="id_feature" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeaturesRooms_Rooms">
+          <End Type="HotelModel.Room" Role="Room" Multiplicity="1" />
+          <End Type="HotelModel.FeaturesRoom" Role="FeaturesRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="id_room" />
+            </Principal>
+            <Dependent Role="FeaturesRoom">
+              <PropertyRef Name="id_room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -565,6 +717,30 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_insert_client" FunctionName="HotelModel.Store.sp_insert_client" />
           <FunctionImportMapping FunctionImportName="sp_insert_reservation" FunctionName="HotelModel.Store.sp_insert_reservation" />
+          <EntitySetMapping Name="Features">
+            <EntityTypeMapping TypeName="HotelModel.Feature">
+              <MappingFragment StoreEntitySet="Features">
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id_feature" ColumnName="id_feature" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeaturesRooms">
+            <EntityTypeMapping TypeName="HotelModel.FeaturesRoom">
+              <MappingFragment StoreEntitySet="FeaturesRooms">
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="id_feature" ColumnName="id_feature" />
+                <ScalarProperty Name="id_room" ColumnName="id_room" />
+                <ScalarProperty Name="id_features_rooms" ColumnName="id_features_rooms" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_insert_feature" FunctionName="HotelModel.Store.sp_insert_feature" />
+          <FunctionImportMapping FunctionImportName="sp_insert_feature_room" FunctionName="HotelModel.Store.sp_insert_feature_room" />
+          <FunctionImportMapping FunctionImportName="sp_update_feature" FunctionName="HotelModel.Store.sp_update_feature" />
+          <FunctionImportMapping FunctionImportName="sp_update_feature_room" FunctionName="HotelModel.Store.sp_update_feature_room" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

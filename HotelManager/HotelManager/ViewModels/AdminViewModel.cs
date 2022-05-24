@@ -21,7 +21,8 @@ namespace HotelManager.ViewModels
         public ICommand EditServicesCommand { get; }
         public ICommand AddServicesCommand { get; }
 
-       
+        public ICommand EditFeaturesCommand { get; }
+        public ICommand AddFeaturesCommand { get; }
 
       
      
@@ -36,7 +37,20 @@ namespace HotelManager.ViewModels
             EditServicesCommand = new RelayCommand(EditServices);
             AddServicesCommand = new RelayCommand(AddServices);
 
+            EditFeaturesCommand = new RelayCommand(EditFeatures);
+            AddFeaturesCommand = new RelayCommand(AddFeatures);
 
+        }
+
+        private void AddFeatures()
+        {
+           AddFeaturesWindow addFeaturesWindow = new AddFeaturesWindow();
+            addFeaturesWindow.Show();
+        }
+
+        private void EditFeatures()
+        {
+            throw new NotImplementedException();
         }
 
         private void AddServices()

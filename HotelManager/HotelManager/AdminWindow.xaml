@@ -14,11 +14,13 @@
         <ImageBrush ImageSource="/Resources/adminBackground.jpg" Stretch="Fill" />
     </Window.Background>
     <Grid Margin="-17,0,-47,-58">
-        <Button Command="{Binding EditServicesCommand}" Content="Edit Services" Margin="25,74,625,314" Background="#FFC2ED90" FontSize="16" FontFamily="Bahnschrift" Foreground="#FF0A0000"/>
-        <Button Command="{Binding EditRoomsCommand}" Content="Edit Rooms" Margin="578,74,72,314" Background="#FF549807" FontFamily="Bahnschrift" FontSize="16"/>
-        <Button Command="{Binding AddRoomsCommand}" Content="Add Rooms" Margin="578,218,72,170" Background="#FF549807" FontSize="16" FontFamily="Bahnschrift"/>
-        <Button Command="{Binding EditOffersCommand}" Content="Edit Offers" Margin="297,74,353,314" Background="#FF58C85F" FontSize="16" FontFamily="Bahnschrift"/>
-        <Button Command="{Binding AddServicesCommand}" Content="Add Services" Margin="25,213,625,175" Background="#FFC2ED90" FontFamily="Bahnschrift" FontSize="16"/>
-        <Button Command="{Binding AddOffersCommand}" Content="Add Offers" Margin="297,218,353,170" RenderTransformOrigin="1.121,1.453" Background="#FF58C85F" FontFamily="Bahnschrift" FontSize="16"/>
+        <Button Command="{Binding EditServicesCommand}" Content="Edit Services" Margin="202,79,448,309" Background="#FFC2ED90" FontSize="16" FontFamily="Bahnschrift" Foreground="#FF0A0000"/>
+        <Button Command="{Binding EditRoomsCommand}" Content="Edit Rooms" Margin="640,79,10,309" Background="#FF549807" FontFamily="Bahnschrift" FontSize="16"/>
+        <Button Command="{Binding AddRoomsCommand}" Content="Add Rooms" Margin="640,223,10,165" Background="#FF549807" FontSize="16" FontFamily="Bahnschrift"/>
+        <Button Command="{Binding EditOffersCommand}" Content="Edit Offers" Margin="422,79,228,309" Background="#FF58C85F" FontSize="16" FontFamily="Bahnschrift"/>
+        <Button Command="{Binding AddServicesCommand}" Content="Add Services" Margin="202,223,448,165" Background="#FFC2ED90" FontFamily="Bahnschrift" FontSize="16"/>
+        <Button Command="{Binding AddOffersCommand}" Content="Add Offers" Margin="422,223,228,165" RenderTransformOrigin="1.121,1.453" Background="#FF58C85F" FontFamily="Bahnschrift" FontSize="16"/>
+        <Button Command="{Binding EditFeaturesCommand}" Content="Edit Features" Margin="-17,79,667,309" Background="#FFDCEFC4" FontSize="16" FontFamily="Bahnschrift" Foreground="#FF0A0000"/>
+        <Button Command="{Binding AddFeaturesCommand}" Content="Add Features" Margin="-17,223,667,165" Background="#FFDCEFC4" FontFamily="Bahnschrift" FontSize="16"/>
     </Grid>
 </Window>

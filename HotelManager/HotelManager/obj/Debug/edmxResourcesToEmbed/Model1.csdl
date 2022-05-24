@@ -15,6 +15,7 @@
     <NavigationProperty Name="Offers" Relationship="HotelModel.FK_Offers_Rooms" FromRole="Room" ToRole="Offer" />
     <Property Name="deleted" Type="Int64" />
     <NavigationProperty Name="Reservations" Relationship="HotelModel.FK_Reservations_Rooms" FromRole="Room" ToRole="Reservation" />
+    <NavigationProperty Name="FeaturesRooms" Relationship="HotelModel.FK_FeaturesRooms_Rooms" FromRole="Room" ToRole="FeaturesRoom" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -124,6 +125,38 @@
       <Parameter Name="id_service" Mode="In" Type="Int64" />
       <Parameter Name="price" Mode="In" Type="Double" />
       <Parameter Name="deleted" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <EntitySet Name="Features" EntityType="HotelModel.Feature" />
+    <EntitySet Name="FeaturesRooms" EntityType="HotelModel.FeaturesRoom" />
+    <AssociationSet Name="FK_FeaturesRooms_Features" Association="HotelModel.FK_FeaturesRooms_Features">
+      <End Role="Feature" EntitySet="Features" />
+      <End Role="FeaturesRoom" EntitySet="FeaturesRooms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FeaturesRooms_Rooms" Association="HotelModel.FK_FeaturesRooms_Rooms">
+      <End Role="Room" EntitySet="Rooms" />
+      <End Role="FeaturesRoom" EntitySet="FeaturesRooms" />
+    </AssociationSet>
+    <FunctionImport Name="sp_insert_feature">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="price" Mode="In" Type="Double" />
+      <Parameter Name="deleted" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_insert_feature_room">
+      <Parameter Name="room_id" Mode="In" Type="Int64" />
+      <Parameter Name="feature_id" Mode="In" Type="Int32" />
+      <Parameter Name="deleted" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_update_feature">
+      <Parameter Name="feature_id" Mode="In" Type="Int32" />
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="price" Mode="In" Type="Double" />
+      <Parameter Name="deleted" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_update_feature_room">
+      <Parameter Name="feature_room_id" Mode="In" Type="Int32" />
+      <Parameter Name="feature_id" Mode="In" Type="Int32" />
+      <Parameter Name="room_id" Mode="In" Type="Int64" />
+      <Parameter Name="deleted" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_get_users_Result">
@@ -240,6 +273,51 @@
       </Principal>
       <Dependent Role="Reservation">
         <PropertyRef Name="id_service" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Feature">
+    <Key>
+      <PropertyRef Name="id_feature" />
+    </Key>
+    <Property Name="id_feature" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Double" Nullable="false" />
+    <Property Name="deleted" Type="Int32" />
+    <NavigationProperty Name="FeaturesRooms" Relationship="HotelModel.FK_FeaturesRooms_Features" FromRole="Feature" ToRole="FeaturesRoom" />
+  </EntityType>
+  <EntityType Name="FeaturesRoom">
+    <Key>
+      <PropertyRef Name="id_features_rooms" />
+    </Key>
+    <Property Name="id_features_rooms" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_room" Type="Int64" Nullable="false" />
+    <Property Name="id_feature" Type="Int32" Nullable="false" />
+    <Property Name="deleted" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Feature" Relationship="HotelModel.FK_FeaturesRooms_Features" FromRole="FeaturesRoom" ToRole="Feature" />
+    <NavigationProperty Name="Room" Relationship="HotelModel.FK_FeaturesRooms_Rooms" FromRole="FeaturesRoom" ToRole="Room" />
+  </EntityType>
+  <Association Name="FK_FeaturesRooms_Features">
+    <End Type="HotelModel.Feature" Role="Feature" Multiplicity="1" />
+    <End Type="HotelModel.FeaturesRoom" Role="FeaturesRoom" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Feature">
+        <PropertyRef Name="id_feature" />
+      </Principal>
+      <Dependent Role="FeaturesRoom">
+        <PropertyRef Name="id_feature" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FeaturesRooms_Rooms">
+    <End Type="HotelModel.Room" Role="Room" Multiplicity="1" />
+    <End Type="HotelModel.FeaturesRoom" Role="FeaturesRoom" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="id_room" />
+      </Principal>
+      <Dependent Role="FeaturesRoom">
+        <PropertyRef Name="id_room" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

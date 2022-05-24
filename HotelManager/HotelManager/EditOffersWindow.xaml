@@ -18,6 +18,7 @@
                 <DataGridTextColumn IsReadOnly="True" Header="Price" Binding="{Binding Price, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
                 <DataGridTextColumn IsReadOnly="True" Header="Date Start" Binding="{Binding DateStart, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
                 <DataGridTextColumn IsReadOnly="True" Header="Date End" Binding="{Binding DateEnd, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
+                <DataGridTextColumn IsReadOnly="True" Header="Room Type" Binding="{Binding RoomType, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
 
             </DataGrid.Columns>
             <DataGrid.RowStyle>

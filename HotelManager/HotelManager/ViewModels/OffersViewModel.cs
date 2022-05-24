@@ -37,6 +37,7 @@ namespace HotelManager.ViewModels
             var tempOffers = new ObservableCollection<OffersModel>();
             HotelEntities hotelEntities = new HotelEntities();
             List<Offer> listOffers = hotelEntities.Offers.ToList();
+            List<Room> listRooms = hotelEntities.Rooms.ToList();
             foreach (var offer in listOffers)
             {
                 if (offer.deleted == 0 || offer.deleted == null)
@@ -49,11 +50,18 @@ namespace HotelManager.ViewModels
                     tempOfferModel.DateStart = Convert.ToString(offer.date_start);
                     tempOfferModel.DateEnd = Convert.ToString(offer.date_end);
                     tempOfferModel.RoomId = Convert.ToInt32(offer.room_id);
-                    tempOffers.Add(tempOfferModel);
+                    foreach (Room room in listRooms)
+                    {
+                        if (offer.room_id == room.id_room)
+                        {
+                            tempOfferModel.RoomType = room.type;
+                        }
+                    }
+                        tempOffers.Add(tempOfferModel);
                 }
-            }
 
-            return tempOffers;
+            }
+                return tempOffers;
         }
         public ICommand AddCommand { get; }
 
@@ -81,6 +89,7 @@ namespace HotelManager.ViewModels
 
         private void Delete()
         {
+
             tempOffer = currentOffer;
             HotelEntities hotelEntities = new HotelEntities();
             hotelEntities.sp_update_offer(tempOffer.RoomId, tempOffer.Id, tempOffer.Name, tempOffer.Description, Convert.ToDouble(tempOffer.Price),
@@ -90,7 +99,19 @@ namespace HotelManager.ViewModels
 
         private void Update()
         {
+            
             HotelEntities hotelEntities = new HotelEntities();
+        
+            List<Room> listRooms = hotelEntities.Rooms.ToList();
+
+            foreach (var item in listRooms)
+            {
+                if(item.type == tempOffer.RoomType )
+                {
+                    tempOffer.RoomId = Convert.ToInt32(item.id_room);
+                }
+            }
+
             hotelEntities.sp_update_offer(tempOffer.RoomId, tempOffer.Id, tempOffer.Name, tempOffer.Description, Convert.ToDouble(tempOffer.Price),
                 Convert.ToDateTime(tempOffer.DateStart), Convert.ToDateTime(tempOffer.DateEnd), 0);
             MessageBox.Show("Updated Succesfully!");
@@ -98,7 +119,18 @@ namespace HotelManager.ViewModels
 
         private void Add()
         {
+
+
             HotelEntities hotelEntities = new HotelEntities();
+            List<Room> listRooms = hotelEntities.Rooms.ToList();
+
+            foreach (var item in listRooms)
+            {
+                if (item.type == offersModel.RoomType)
+                {
+                    offersModel.RoomId = Convert.ToInt32(item.id_room);
+                }
+            }
             hotelEntities.sp_insert_offer(offersModel.Name, offersModel.Description, Convert.ToDouble(offersModel.Price),
                 Convert.ToDateTime(offersModel.DateStart), Convert.ToDateTime(offersModel.DateEnd), offersModel.RoomId, 0);
             MessageBox.Show("Offer added succesfully!");

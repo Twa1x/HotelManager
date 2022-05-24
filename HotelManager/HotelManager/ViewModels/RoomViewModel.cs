@@ -15,7 +15,7 @@ namespace HotelManager.ViewModels
     {
         public RoomModel roomModel { get; private set; }
 
-        private RoomModel tempRoom;
+        private RoomModel tempRoom = new RoomModel();
         public RoomModel TempRoom
 
         {

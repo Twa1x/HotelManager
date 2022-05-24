@@ -83,5 +83,29 @@
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="sp_insert_client" FunctionName="HotelModel.Store.sp_insert_client" />
     <FunctionImportMapping FunctionImportName="sp_insert_reservation" FunctionName="HotelModel.Store.sp_insert_reservation" />
+    <EntitySetMapping Name="Features">
+      <EntityTypeMapping TypeName="HotelModel.Feature">
+        <MappingFragment StoreEntitySet="Features">
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id_feature" ColumnName="id_feature" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FeaturesRooms">
+      <EntityTypeMapping TypeName="HotelModel.FeaturesRoom">
+        <MappingFragment StoreEntitySet="FeaturesRooms">
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+          <ScalarProperty Name="id_feature" ColumnName="id_feature" />
+          <ScalarProperty Name="id_room" ColumnName="id_room" />
+          <ScalarProperty Name="id_features_rooms" ColumnName="id_features_rooms" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_insert_feature" FunctionName="HotelModel.Store.sp_insert_feature" />
+    <FunctionImportMapping FunctionImportName="sp_insert_feature_room" FunctionName="HotelModel.Store.sp_insert_feature_room" />
+    <FunctionImportMapping FunctionImportName="sp_update_feature" FunctionName="HotelModel.Store.sp_update_feature" />
+    <FunctionImportMapping FunctionImportName="sp_update_feature_room" FunctionName="HotelModel.Store.sp_update_feature_room" />
   </EntityContainerMapping>
 </Mapping>

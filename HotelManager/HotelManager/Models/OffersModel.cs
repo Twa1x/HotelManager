@@ -15,6 +15,7 @@ namespace HotelManager.Models
         private string _dateStart;
         private string _dateEnd;
         private int _roomId;
+        private string _roomType;
 
 
         public string Name
@@ -23,6 +24,11 @@ namespace HotelManager.Models
             set { OnPropertyChanged(ref _name, value); }
         }
 
+        public string RoomType
+        {
+            get { return _roomType; }
+            set { OnPropertyChanged(ref _roomType, value); }
+        }
         public int Id
         {
             get { return _id; }

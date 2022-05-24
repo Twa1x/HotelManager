@@ -65,6 +65,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddFeaturesWindow.xaml.cs">
+      <DependentUpon>AddFeaturesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddOffersWindow.xaml.cs">
       <DependentUpon>AddOffersWindow.xaml</DependentUpon>
     </Compile>
@@ -82,6 +85,12 @@
     </Compile>
     <Compile Include="DetailsRoomWindow.xaml.cs">
       <DependentUpon>DetailsRoomWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditFeatures.xaml.cs">
+      <DependentUpon>EditFeatures.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditFeaturesWindow.xaml.cs">
+      <DependentUpon>EditFeaturesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditOffers.xaml.cs">
       <DependentUpon>EditOffers.xaml</DependentUpon>
@@ -104,6 +113,12 @@
     <Compile Include="EmployeeWindow.xaml.cs">
       <DependentUpon>EmployeeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Feature.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FeaturesRoom.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="GuestWindow.xaml.cs">
       <DependentUpon>GuestWindow.xaml</DependentUpon>
     </Compile>
@@ -125,6 +140,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\FeatureModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\OffersModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
@@ -157,6 +173,7 @@
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AdminViewModel.cs" />
+    <Compile Include="ViewModels\FeatureViewModel.cs" />
     <Compile Include="ViewModels\GuestViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -164,6 +181,10 @@
     <Compile Include="ViewModels\RoomViewModel.cs" />
     <Compile Include="ViewModels\ServicesViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
+    <Page Include="AddFeaturesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddOffersWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -181,6 +202,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DetailsRoomWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditFeatures.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditFeaturesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

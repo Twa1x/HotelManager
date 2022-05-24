@@ -33,6 +33,8 @@ namespace HotelManager
         public virtual DbSet<Offer> Offers { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Reservation> Reservations { get; set; }
+        public virtual DbSet<Feature> Features { get; set; }
+        public virtual DbSet<FeaturesRoom> FeaturesRooms { get; set; }
     
         public virtual ObjectResult<sp_get_users_Result> sp_get_users()
         {
@@ -290,6 +292,82 @@ namespace HotelManager
                 new ObjectParameter("deleted", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_reservation", date_startParameter, date_endParameter, statusParameter, id_roomParameter, id_clientParameter, id_serviceParameter, priceParameter, deletedParameter);
+        }
+    
+        public virtual int sp_insert_feature(string name, Nullable<double> price, Nullable<int> deleted)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var priceParameter = price.HasValue ?
+                new ObjectParameter("price", price) :
+                new ObjectParameter("price", typeof(double));
+    
+            var deletedParameter = deleted.HasValue ?
+                new ObjectParameter("deleted", deleted) :
+                new ObjectParameter("deleted", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_feature", nameParameter, priceParameter, deletedParameter);
+        }
+    
+        public virtual int sp_insert_feature_room(Nullable<long> room_id, Nullable<int> feature_id, Nullable<int> deleted)
+        {
+            var room_idParameter = room_id.HasValue ?
+                new ObjectParameter("room_id", room_id) :
+                new ObjectParameter("room_id", typeof(long));
+    
+            var feature_idParameter = feature_id.HasValue ?
+                new ObjectParameter("feature_id", feature_id) :
+                new ObjectParameter("feature_id", typeof(int));
+    
+            var deletedParameter = deleted.HasValue ?
+                new ObjectParameter("deleted", deleted) :
+                new ObjectParameter("deleted", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_feature_room", room_idParameter, feature_idParameter, deletedParameter);
+        }
+    
+        public virtual int sp_update_feature(Nullable<int> feature_id, string name, Nullable<double> price, Nullable<int> deleted)
+        {
+            var feature_idParameter = feature_id.HasValue ?
+                new ObjectParameter("feature_id", feature_id) :
+                new ObjectParameter("feature_id", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var priceParameter = price.HasValue ?
+                new ObjectParameter("price", price) :
+                new ObjectParameter("price", typeof(double));
+    
+            var deletedParameter = deleted.HasValue ?
+                new ObjectParameter("deleted", deleted) :
+                new ObjectParameter("deleted", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_update_feature", feature_idParameter, nameParameter, priceParameter, deletedParameter);
+        }
+    
+        public virtual int sp_update_feature_room(Nullable<int> feature_room_id, Nullable<int> feature_id, Nullable<long> room_id, Nullable<int> deleted)
+        {
+            var feature_room_idParameter = feature_room_id.HasValue ?
+                new ObjectParameter("feature_room_id", feature_room_id) :
+                new ObjectParameter("feature_room_id", typeof(int));
+    
+            var feature_idParameter = feature_id.HasValue ?
+                new ObjectParameter("feature_id", feature_id) :
+                new ObjectParameter("feature_id", typeof(int));
+    
+            var room_idParameter = room_id.HasValue ?
+                new ObjectParameter("room_id", room_id) :
+                new ObjectParameter("room_id", typeof(long));
+    
+            var deletedParameter = deleted.HasValue ?
+                new ObjectParameter("deleted", deleted) :
+                new ObjectParameter("deleted", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_update_feature_room", feature_room_idParameter, feature_idParameter, room_idParameter, deletedParameter);
         }
     }
 }

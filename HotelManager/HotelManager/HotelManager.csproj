@@ -125,6 +125,9 @@
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MakeReservationWindow.xaml.cs">
+      <DependentUpon>MakeReservationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -143,16 +146,23 @@
     <Compile Include="Models\FeatureModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\OffersModel.cs" />
+    <Compile Include="Models\ReservationModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
     <Compile Include="Models\ServicesModel.cs" />
     <Compile Include="Models\SignUpModel.cs" />
     <Compile Include="Offer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="OffersWindow.xaml.cs">
+      <DependentUpon>OffersWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PasswordHelper.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Reservation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReservationsWindow.xaml.cs">
+      <DependentUpon>ReservationsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Room.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -173,11 +183,14 @@
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AdminViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\FeatureViewModel.cs" />
     <Compile Include="ViewModels\GuestViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\OffersViewModel.cs" />
+    <Compile Include="ViewModels\ReservationViewModel.cs" />
     <Compile Include="ViewModels\RoomViewModel.cs" />
     <Compile Include="ViewModels\ServicesViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
@@ -261,6 +274,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MakeReservationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OffersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReservationsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SignUpWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -349,6 +374,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\userBackground.jpg" />
+    <Resource Include="Resources\employeeBackground.jpg" />
     <Resource Include="Resources\guestBackground.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

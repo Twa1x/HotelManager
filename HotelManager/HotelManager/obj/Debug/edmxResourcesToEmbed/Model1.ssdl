@@ -244,6 +244,10 @@
     <Parameter Name="date_end" Type="date" Mode="In" />
     <Parameter Name="deleted" Type="bigint" Mode="In" />
   </Function>
+  <Function Name="sp_update_reservations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="reservation_id" Type="bigint" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="sp_update_room" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="room_id" Type="int" Mode="In" />
     <Parameter Name="type" Type="varchar" Mode="In" />

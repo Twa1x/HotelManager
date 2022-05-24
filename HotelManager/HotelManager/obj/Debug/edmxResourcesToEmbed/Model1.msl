@@ -107,5 +107,6 @@
     <FunctionImportMapping FunctionImportName="sp_insert_feature_room" FunctionName="HotelModel.Store.sp_insert_feature_room" />
     <FunctionImportMapping FunctionImportName="sp_update_feature" FunctionName="HotelModel.Store.sp_update_feature" />
     <FunctionImportMapping FunctionImportName="sp_update_feature_room" FunctionName="HotelModel.Store.sp_update_feature_room" />
+    <FunctionImportMapping FunctionImportName="sp_update_reservations" FunctionName="HotelModel.Store.sp_update_reservations" />
   </EntityContainerMapping>
 </Mapping>

@@ -5,8 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelManager"
         mc:Ignorable="d"
+         xmlns:viewmodels="clr-namespace:HotelManager.ViewModels"
         Title="UserWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <viewmodels:ClientViewModel/>
+    </Window.DataContext>
+    <Window.Background>
+        <ImageBrush ImageSource="/Resources/userBackground.jpg" Stretch="Fill" />
+    </Window.Background>
+
     <Grid>
-        
+        <Button Command="{Binding GuestViewModel.CheckRoomsCommand}" Content="Check Available Rooms" Margin="581,183,78,193"/>
+
+        <DataGrid  Name ="dataGrid" HorizontalAlignment="Left" Height="196" Margin="224,45,0,0" VerticalAlignment="Top" Width="327" ItemsSource="{Binding GuestViewModel.RoomsGuest}" SelectedItem="{Binding GuestViewModel.CurrentRoomGuest}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="Type" Binding="{Binding Type, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
+                <DataGridTextColumn IsReadOnly="True" Header="Price" Binding="{Binding Price, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" 
+                                     Handler="DataGridRow_MouseDoubleClick"/>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+        <Label Content="Rooms Details" Margin="325,10,249,372" FontSize="16" FontFamily="Bahnschrift" Foreground="White"/>
+        <Button  Command="{Binding GuestViewModel.DetailRoomCommand}" Name="DetailsBtn" IsEnabled="False" Content="Details" Margin="581,107,78,280" RenderTransformOrigin="0.542,-0.253"/>
+        <Label Content="Date Start&#xD;&#xA;(dd-mm-yyyy)" Margin="10,337,645,36" Foreground="White"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding GuestViewModel.DateStart,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10,379,645,18"/>
+        <Label Content="Date End&#xD;&#xA;(dd-mm-yyyy)" Margin="195,337,460,36" Foreground="White"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding GuestViewModel.DateEnd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="195,379,460,18"/>
+        <Button Content="Search" Command="{Binding GuestViewModel.SearchCommand}" Margin="364,370,318,10"/>
+        <Grid>
+            <Button Command="{Binding GuestViewModel.CheckRoomsCommand}" Content="Check Available Rooms" Margin="581,183,78,193"/>
+
+            <DataGrid  x:Name ="dataGrid1" HorizontalAlignment="Left" Height="196" Margin="224,45,0,0" VerticalAlignment="Top" Width="327" ItemsSource="{Binding GuestViewModel.RoomsGuest}" SelectedItem="{Binding GuestViewModel.CurrentRoomGuest}" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn IsReadOnly="True" Header="Type" Binding="{Binding Type, Mode=OneWay, UpdateSourceTrigger=Default}" Width="100" />
+                    <DataGridTextColumn IsReadOnly="True" Header="Price" Binding="{Binding Price, Mode=OneWay, UpdateSourceTrigger=Default}" Width="100" />
+                </DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <EventSetter Event="Control.MouseDoubleClick" 
+                            Handler="DataGridRow_MouseDoubleClick"/>
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
+            <Label Content="Rooms Details" Margin="325,10,249,372" FontSize="16" FontFamily="Bahnschrift" Foreground="White"/>
+            <Button  Command="{Binding GuestViewModel.DetailRoomCommand}" x:Name="DetailsBtn1" IsEnabled="False" Content="Details" Margin="581,107,78,280" RenderTransformOrigin="0.542,-0.253"/>
+            <Label Content="Date Start&#xA;(dd-mm-yyyy)" Margin="10,337,645,36" Foreground="White"/>
+            <TextBox TextWrapping="Wrap" Text="{Binding GuestViewModel.DateStart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,379,645,18"/>
+            <Label Content="Date End&#xA;(dd-mm-yyyy)" Margin="195,337,460,36" Foreground="White"/>
+            <TextBox TextWrapping="Wrap" Text="{Binding GuestViewModel.DateEnd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="195,379,460,18"/>
+            <Button Content="View Offers" Command="{Binding ViewOffersCommand}" Margin="497,370,185,9"/>
+            <Button Content="Make a reservation" Command="{Binding MakeReservationCommand}" Margin="640,370,42,9" RenderTransformOrigin="1.004,0.479"/>
+        </Grid>
     </Grid>
 </Window>

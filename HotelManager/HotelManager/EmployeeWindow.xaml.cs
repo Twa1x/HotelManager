@@ -23,5 +23,10 @@ namespace HotelManager
         {
             InitializeComponent();
         }
+
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DetailsBtn.IsEnabled = true;
+        }
     }
 }

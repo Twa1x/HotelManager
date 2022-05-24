@@ -369,5 +369,18 @@ namespace HotelManager
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_update_feature_room", feature_room_idParameter, feature_idParameter, room_idParameter, deletedParameter);
         }
+    
+        public virtual int sp_update_reservations(Nullable<long> reservation_id, string status)
+        {
+            var reservation_idParameter = reservation_id.HasValue ?
+                new ObjectParameter("reservation_id", reservation_id) :
+                new ObjectParameter("reservation_id", typeof(long));
+    
+            var statusParameter = status != null ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_update_reservations", reservation_idParameter, statusParameter);
+        }
     }
 }

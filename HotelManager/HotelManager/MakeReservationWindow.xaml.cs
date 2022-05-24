@@ -15,18 +15,13 @@ using System.Windows.Shapes;
 namespace HotelManager
 {
     /// <summary>
-    /// Interaction logic for UserWindow.xaml
+    /// Interaction logic for MakeReservationWindow.xaml
     /// </summary>
-    public partial class UserWindow : Window
+    public partial class MakeReservationWindow : Window
     {
-        public UserWindow()
+        public MakeReservationWindow()
         {
             InitializeComponent();
-        }
-
-        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            DetailsBtn1.IsEnabled = true;
         }
     }
 }

@@ -100,3 +100,9 @@ C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\
 C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\EditFeaturesWindow.g.cs
 C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\EditFeatures.baml
 C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\EditFeaturesWindow.baml
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\ReservationsWindow.g.cs
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\ReservationsWindow.baml
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\OffersWindow.g.cs
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\OffersWindow.baml
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\MakeReservationWindow.g.cs
+C:\Users\Alex\Documents\GitHub\HotelManager\HotelManager\HotelManager\obj\Debug\MakeReservationWindow.baml

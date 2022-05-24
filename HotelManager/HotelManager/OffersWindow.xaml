@@ -1,0 +1,35 @@
+﻿<Window x:Class="HotelManager.OffersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+          xmlns:viewmodels="clr-namespace:HotelManager.ViewModels"
+        xmlns:local="clr-namespace:HotelManager"
+        mc:Ignorable="d"
+        Title="OffersWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <viewmodels:OffersViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <DataGrid  Name ="dataGrid" HorizontalAlignment="Center" Height="270" VerticalAlignment="Top" Width="608" ItemsSource="{Binding Offers}" SelectedItem="{Binding CurrentOffer}" AutoGenerateColumns="False" Margin="0,43,0,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Name, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
+                <DataGridTextColumn IsReadOnly="True" Header="Description " Binding="{Binding Description, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
+                <DataGridTextColumn IsReadOnly="True" Header="Price" Binding="{Binding Price, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
+                <DataGridTextColumn IsReadOnly="True" Header="Date Start" Binding="{Binding DateStart, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
+                <DataGridTextColumn IsReadOnly="True" Header="Date End" Binding="{Binding DateEnd, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
+                <DataGridTextColumn IsReadOnly="True" Header="Room Type" Binding="{Binding RoomType, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
+
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" 
+                                     Handler="DataGridRow_MouseDoubleClick"/>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+        <Button IsEnabled="False"  Name="btnBook" Content="Book Selected" Margin="288,337,288,39"/>
+
+    </Grid>
+</Window>

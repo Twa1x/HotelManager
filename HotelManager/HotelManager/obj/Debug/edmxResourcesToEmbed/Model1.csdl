@@ -158,6 +158,10 @@
       <Parameter Name="room_id" Mode="In" Type="Int64" />
       <Parameter Name="deleted" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="sp_update_reservations">
+      <Parameter Name="reservation_id" Mode="In" Type="Int64" />
+      <Parameter Name="status" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_get_users_Result">
     <Property Type="Int64" Name="id_user" Nullable="false" />

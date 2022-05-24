@@ -1,0 +1,38 @@
+﻿<Window x:Class="HotelManager.ReservationsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HotelManager"
+        xmlns:viewmodels="clr-namespace:HotelManager.ViewModels"
+
+        mc:Ignorable="d"
+        Title="ReservationsWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <viewmodels:ReservationViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <DataGrid  Name ="dataGrid" HorizontalAlignment="Left" Height="270" Margin="39,31,0,0" VerticalAlignment="Top" Width="484" ItemsSource="{Binding Reservations}" SelectedItem="{Binding CurrentReservation}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="Room Type" Binding="{Binding RoomType, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
+                <DataGridTextColumn IsReadOnly="True" Header="Status" Binding="{Binding Status, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
+                <DataGridTextColumn IsReadOnly="True" Header="Price" Binding="{Binding Price, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
+                <DataGridTextColumn IsReadOnly="True" Header="Date Start" Binding="{Binding DateStart, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
+                <DataGridTextColumn IsReadOnly="True" Header="Date End" Binding="{Binding DateEnd, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
+
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" 
+                                     Handler="DataGridRow_MouseDoubleClick"/>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+        <Button IsEnabled="False"  Command ="{Binding ActiveCommand}" Name="activeBtn" Content="Active" Margin="39,333,667,60"/>
+        <Button  IsEnabled="False"  Command="{Binding PaidCommand}" Name="paidBtn" Content="Paid" Margin="175,333,531,60"/>
+        <Button   IsEnabled="False" Command="{Binding CanceledCommand}" Name="canceledBtn" Content="Canceled" Margin="306,333,400,60"/>
+
+
+
+    </Grid>
+</Window>

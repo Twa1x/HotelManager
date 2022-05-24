@@ -42,13 +42,13 @@ namespace HotelManager.ViewModels
 
         private void Guest()
         {
-            //HotelEntities hotelEntities = new HotelEntities();
-            //hotelEntities.sp_insert_reservation(Convert.ToDateTime("15-01-2022"), Convert.ToDateTime("17-01-2022"), "active", 2, 3, 2, 23.5, 0);
+           // HotelEntities hotelEntities = new HotelEntities();
+           // hotelEntities.sp_insert_reservation(Convert.ToDateTime("15-01-2022"), Convert.ToDateTime("17-01-2022"), "active", 11, 5, 4, 330.5, 0);
+           // hotelEntities.sp_insert_reservation(Convert.ToDateTime("15-03-2022"), Convert.ToDateTime("18-03-2022"), "achitat", 28, 5, 4, 200.5, 0);
             GuestWindow guestWindow = new GuestWindow();
             guestWindow.Show();
 
-            //AdminWindow adminWindow = new AdminWindow(); 
-            //adminWindow.Show();
+          
         }
 
     }

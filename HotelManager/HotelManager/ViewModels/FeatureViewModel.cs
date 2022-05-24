@@ -74,7 +74,10 @@ namespace HotelManager.ViewModels
 
         private void Delete()
         {
-            throw new NotImplementedException();
+            tempFeature = currentFeature;
+            HotelEntities hotelEntites = new HotelEntities();
+            hotelEntites.sp_update_feature(tempFeature.Id, tempFeature.Name, Convert.ToDouble(tempFeature.Price), 1);
+            MessageBox.Show("Deleted Succesfully!");
         }
 
         private void Update()
@@ -84,7 +87,10 @@ namespace HotelManager.ViewModels
 
         private void Edit()
         {
-            throw new NotImplementedException();
+            tempFeature = currentFeature;
+            EditFeatures editFeatures = new EditFeatures();
+            editFeatures.DataContext = this;
+            editFeatures.Show();
         }
 
         private void Add()

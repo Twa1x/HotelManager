@@ -16,7 +16,18 @@
         <Label Content="Price" Margin="10,10,573,359" Background="#FF84FF86" FontSize="20" FontStyle="Italic" FontFamily="Bahnschrift"/>
         <TextBox TextWrapping="Wrap"  IsReadOnly="True" Text="{Binding CurrentRoomGuest.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="242,10,415,359"/>
         <Label Content="Aditional Services" Margin="412,58,181,310" Background="#FF84FF86" FontSize="20" FontStyle="Italic" FontFamily="Bahnschrift"/>
-        <TextBox TextWrapping="Wrap"  IsReadOnly="True" Text="{Binding CurrentRoomGuest.AditionalServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="644,59,30,310"/>
+        <DataGrid  Name ="dataGrid" HorizontalAlignment="Left" Height="181" Margin="592,10,0,0" VerticalAlignment="Top" Width="198" ItemsSource="{Binding Features}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Name, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
+                <DataGridTextColumn IsReadOnly="True" Header="Price" Binding="{Binding Price, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
 
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" 
+                                     Handler="DataGridRow_MouseDoubleClick"/>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
     </Grid>
 </Window>

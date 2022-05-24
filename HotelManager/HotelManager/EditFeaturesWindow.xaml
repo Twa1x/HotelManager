@@ -4,9 +4,29 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelManager"
+        xmlns:viewmodels="clr-namespace:HotelManager.ViewModels"
         mc:Ignorable="d"
         Title="EditFeaturesWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <viewmodels:FeatureViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <DataGrid  Name ="dataGrid" HorizontalAlignment="Center" Height="270" Margin="0,49,0,0" VerticalAlignment="Top" Width="198" ItemsSource="{Binding Features}" SelectedItem="{Binding CurrentFeature}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Name, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
+                <DataGridTextColumn IsReadOnly="True" Header="Price" Binding="{Binding Price, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
+
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" 
+                                     Handler="DataGridRow_MouseDoubleClick"/>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+        <Button Name="edit" Command="{Binding EditCommand}" IsEnabled="False" Content="Edit Selected" Margin="262,350,424,34"/>
+        <Button Name="delete" Command="{Binding DeleteCommand}" IsEnabled ="False" Content="Delete Selected" Margin="421,350,265,34"/>
+
+
     </Grid>
 </Window>

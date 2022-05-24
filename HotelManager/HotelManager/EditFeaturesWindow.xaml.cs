@@ -23,5 +23,11 @@ namespace HotelManager
         {
             InitializeComponent();
         }
+
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            delete.IsEnabled = true;
+            edit.IsEnabled = true;
+        }
     }
 }

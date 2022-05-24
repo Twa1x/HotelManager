@@ -47,11 +47,43 @@ namespace HotelManager.ViewModels
         public GuestViewModel()
         {
             RoomsGuest = LoadRooms();
+
             CheckRoomsCommand = new RelayCommand(CheckRooms);
             DetailRoomCommand = new RelayCommand(DetailRoom);
             SearchCommand = new RelayCommand(Search);
         }
 
+        public ObservableCollection<FeatureModel> Features { get; set; }
+        private ObservableCollection<FeatureModel> LoadFeatures()
+        {
+
+            var tempFeatures = new ObservableCollection<FeatureModel>();
+            HotelEntities hotelEntities = new HotelEntities();
+            List<Feature> listFeatures = hotelEntities.Features.ToList();
+            List<FeaturesRoom> listFeaturesRoom = hotelEntities.FeaturesRooms.ToList();
+
+            foreach (var item in listFeaturesRoom)
+            {
+
+                if (currentRoomGuest.Id == item.id_room)
+                {
+                    foreach (Feature _feature in listFeatures)
+                    {
+                        if (_feature.id_feature == item.id_feature && _feature.deleted ==0 || _feature.deleted==null)
+                        {
+                            FeatureModel tempFeatureModel = new FeatureModel();
+                            tempFeatureModel.Name = _feature.name;
+                            tempFeatureModel.Price = Convert.ToString(_feature.price);
+                            tempFeatureModel.Id = Convert.ToInt32(_feature.id_feature);
+                            tempFeatures.Add(tempFeatureModel);
+                        }
+                    }
+                }
+            }
+
+
+            return tempFeatures;
+        }
 
         private void Search()
         {
@@ -79,6 +111,8 @@ namespace HotelManager.ViewModels
                 }
             }
 
+          
+
             foreach (var item in roomsList)
             {
                 bool ok = false;
@@ -94,8 +128,12 @@ namespace HotelManager.ViewModels
                 if (!ok)
                 {
                     if (item.deleted == 0 || item.deleted == null || item.availabilty == 1)
-                       stringHelp += ($"Room type: { item.type}, price: {item.price}, aditional services: {item.aditional_services}\n") ;
-                    //Convert.ToDouble((Convert.ToDateTime(dateEnd)-Convert.ToDateTime(dateStart)
+                    {
+                        int numberOfDays =Convert.ToInt32(((Convert.ToDateTime(dateEnd) - Convert.ToDateTime(dateStart))).TotalDays);
+                        double price = item.price * numberOfDays;
+                       
+                        stringHelp += ($"Room type: { item.type}, price: {price}\n");
+                    }
                 }
             }
             MessageBox.Show(stringHelp);
@@ -107,6 +145,7 @@ namespace HotelManager.ViewModels
         {
 
             DetailsRoomWindow detailsRoomWindow = new DetailsRoomWindow();
+            Features = LoadFeatures();
             detailsRoomWindow.DataContext = this;
             detailsRoomWindow.ShowDialog();
         }
@@ -114,6 +153,7 @@ namespace HotelManager.ViewModels
         private void CheckRooms()
         {
             count = 0;
+
             HotelEntities hotelEntities = new HotelEntities();
             List<Room> rooms = hotelEntities.Rooms.ToList();
             foreach (Room room in rooms)

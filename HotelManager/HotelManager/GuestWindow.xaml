@@ -19,7 +19,6 @@
         <DataGrid  Name ="dataGrid" HorizontalAlignment="Left" Height="196" Margin="224,45,0,0" VerticalAlignment="Top" Width="327" ItemsSource="{Binding RoomsGuest}" SelectedItem="{Binding CurrentRoomGuest}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn IsReadOnly="True" Header="Type" Binding="{Binding Type, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
-                <DataGridTextColumn IsReadOnly="True" Header="Services" Binding="{Binding AditionalServices, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
                 <DataGridTextColumn IsReadOnly="True" Header="Price" Binding="{Binding Price, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
             </DataGrid.Columns>
             <DataGrid.RowStyle>

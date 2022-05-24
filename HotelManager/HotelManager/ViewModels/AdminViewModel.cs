@@ -50,7 +50,8 @@ namespace HotelManager.ViewModels
 
         private void EditFeatures()
         {
-            throw new NotImplementedException();
+            EditFeaturesWindow editFeaturesWindow = new EditFeaturesWindow();
+            editFeaturesWindow.Show();
         }
 
         private void AddServices()

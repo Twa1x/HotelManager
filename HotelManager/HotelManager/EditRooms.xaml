@@ -13,8 +13,6 @@
         <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding TempRoom.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="178" Margin="30,132,0,0" />
         <Label Content="Price" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,161,0,0" Background="#FF277B80" Width="178" Height="33" FontSize="16" Foreground="#FFB0B0B0"/>
         <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding  TempRoom.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="178" Margin="30,0,0,0" />
-        <Label Content="Aditional Services&#xD;&#xA;(Fridge/AC/Breakfast)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,234,0,0" Background="#FF277B80" Width="178" Height="66" FontSize="16" Foreground="#FFB0B0B0"/>
-        <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding TempRoom.AditionalServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="178" Margin="30,305,0,0" />
         <Button  Content="Update" Margin="63,333,625,27" Command="{Binding UpdateCommand}"/>
         <Button Content="Select Image 1" Command="{Binding SelectImage1Command}" RenderTransformOrigin="0.5,0.5" Margin="262,209,426,160">
             <Button.RenderTransform>

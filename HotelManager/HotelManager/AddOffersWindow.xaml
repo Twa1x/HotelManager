@@ -23,7 +23,7 @@
         <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding offersModel.DateEnd, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="178" Margin="292,0,0,0" RenderTransformOrigin="0.501,-0.446" BorderBrush="#FFEF0000" />
         <Label Content="Room Type" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,255,0,0" Background="#FF277B80" Width="178" Height="33" FontSize="16" Foreground="#FFB0B0B0"/>
         <Button Command="{Binding AddCommand}" Content="Add" Margin="161,341,419,27"/>
-        <TextBox  HorizontalAlignment="Left" Height="22" TextWrapping="Wrap"  Text ="{Binding offersModel.RoomType, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="178" Margin="292,294,0,0" RenderTransformOrigin="0.501,-0.446" />
+        <TextBox  HorizontalAlignment="Left" Height="22" TextWrapping="Wrap"  Text ="{Binding offersModel.RoomType, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="178" Margin="292,294,0,0" RenderTransformOrigin="0.501,-0.446" BorderBrush="#FFF90303" />
 
     </Grid>
 

@@ -16,8 +16,7 @@
         <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding roomModel.Type, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="178" Margin="30,132,0,0" />
         <Label Content="Price" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,161,0,0" Background="#FF277B80" Width="178" Height="33" FontSize="16" Foreground="#FFB0B0B0"/>
         <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding roomModel.Price, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="178" Margin="30,0,0,0" />
-        <Label Content="Aditional Services&#xD;&#xA;(Fridge/AC/Breakfast)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,234,0,0" Background="#FF277B80" Width="178" Height="66" FontSize="16" Foreground="#FFB0B0B0"/>
-        <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding roomModel.AditionalServices, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="178" Margin="30,305,0,0" />
+        <Label Content="Aditional Services&#xD;&#xA;(Fridge/AC/Breakfast)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="385,13,0,0" Background="#FF277B80" Width="178" Height="66" FontSize="16" Foreground="#FFB0B0B0"/>
         <Button Content="Add" Margin="63,333,625,27" Command="{Binding AddCommand}"/>
         <Button Content="Select Image 1" Command="{Binding SelectImage1Command}" RenderTransformOrigin="0.5,0.5" Margin="262,209,426,160">
             <Button.RenderTransform>
@@ -53,6 +52,19 @@
         <Image Source="{Binding roomModel.Image1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Height="100" Width="100" Margin="264,297,436,37"/>
         <Image Source="{Binding roomModel.Image2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="100" Width="100" Margin="411,297,289,37"/>
         <Image Source="{Binding roomModel.Image3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="100" Width="100" Margin="550,297,150,37"/>
+        <DataGrid  Name ="dataGrid" HorizontalAlignment="Left" Height="181" Margin="572,13,0,0" VerticalAlignment="Top" Width="198" ItemsSource="{Binding Features}" SelectedItem="{Binding CurrentFeature}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Name, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
+                <DataGridTextColumn IsReadOnly="True" Header="Price" Binding="{Binding Price, Mode=OneWay,UpdateSourceTrigger=Default}" Width="100" />
 
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" 
+                                     Handler="DataGridRow_MouseDoubleClick"/>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+        <Button Command="{Binding SelectFeatureCommand}" Content="Add Selected&#xD;&#xA; Feature" Margin="671,199,10,172"/>
     </Grid>
 </Window>

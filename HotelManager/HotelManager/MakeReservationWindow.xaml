@@ -3,10 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:viewmodels="clr-namespace:HotelManager.ViewModels"
         xmlns:local="clr-namespace:HotelManager"
         mc:Ignorable="d"
-        Title="MakeReservationWindow" Height="450" Width="800">
+        Title="MakeReservationWindow" Height="450" Width="810">
+    <Window.DataContext>
+        <viewmodels:ReservationViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+   
+        <Label Content="Type of room&#xA;(Single/Double/Triple)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,72,0,0" Background="#FF277B80" Width="178" Height="55" FontSize="16" Foreground="#FFB0B0B0"/>
+        <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  Text ="{Binding ReservationModel.RoomType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="178" Margin="30,132,0,0" />
+        <Grid Margin="10,0,24,0" Grid.ColumnSpan="2" Grid.RowSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="31*"/>
+                <RowDefinition Height="28*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Date Start&#xA;(dd-mm-yyyy)" Margin="40,150,615,6" Grid.Row="1"/>
+            <TextBox TextWrapping="Wrap" Text="{Binding ReservationModel.DateStart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="40,192,615,184" Grid.RowSpan="2" Grid.Row="1"/>
+            <Label Content="Date End&#xA;(dd-mm-yyyy)" Margin="40,36,615,99" Grid.Row="2"/>
+            <TextBox TextWrapping="Wrap" Text="{Binding ReservationModel.DateEnd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="40,78,615,81" Grid.Row="2"/>
+            <Button Command="{Binding BookCommand}" Content="Book" Margin="40,134,581,10" Grid.Row="2"/>
+        </Grid>
     </Grid>
 </Window>
